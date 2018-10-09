@@ -1,0 +1,48 @@
+{
+      "name": "nlb-was-frontend-admin",
+      "version": "1.0.0",
+      "description": "UI for nlb-was-admin",
+      "author": "WizVision",
+      "main": "index.html",
+      "devDependencies": {
+            "bower": "^1.8.0",
+            "browser-sync": "^2.23.2",
+            "browserify": "^14.5.0",
+            "del": "^3.0.0",
+            "dotenv": "^4.0.0",
+            "gulp": "^3.9.1",
+            "gulp-cache": "^1.0.2",
+            "gulp-concat": "^2.6.1",
+            "gulp-imagemin": "^4.1.0",
+            "gulp-inject": "^4.3.1",
+            "gulp-jshint": "^2.1.0",
+            "gulp-ng-config": "^1.5.0",
+            "gulp-notify": "^3.2.0",
+            "gulp-rename": "^1.2.2",
+            "gulp-replace": "^0.6.1",
+            "gulp-uglify": "^3.0.0",
+            "http-server": "^0.9.0",
+            "jshint": "^2.9.5",
+            "jshint-stylish": "^2.2.1",
+            "main-bower-files": "^2.13.1",
+            "require-dir": "^0.3.2",
+            "run-sequence": "^2.1.0",
+            "sweetalert": "^2.1.0",
+            "vinyl-source-stream": "^2.0.0",
+            "wiredep": "^4.0.0",
+            "wiredep-cli": "^0.1.0"
+      },
+      "scripts": {
+            "bower": "node_modules/.bin/bower",
+            "wiredep": "node_modules/.bin/wiredep",
+            "postinstall": "bower install & gulp",
+            "prestart": "npm install",
+            "start": "http-server -a 0.0.0.0 -p 8000 -c-1"
+      },
+      "dependencies": {
+            "gulp-remove-logging": "^1.2.0",
+            "npm": "^5.7.1",
+            "path-exists": "^3.0.0",
+            "sweetalert": "^2.1.0"
+      }
+}

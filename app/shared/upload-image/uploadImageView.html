@@ -1,0 +1,101 @@
+<!--http://nervgh.github.io/pages/angular-file-upload/examples/image-preview/-->
+
+
+<div class="form-group row">
+
+    <style>
+        .my-drop-zone {
+            border: dotted 3px lightgray;
+        }
+
+        .nv-file-over {
+            border: dotted 3px red;
+        }
+
+        /* Default class applied to drop zones on over */
+
+        .another-file-over-class {
+            border: dotted 3px green;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        canvas {
+            background-color: #f3f3f3;
+           /* -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+            -moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+            box-shadow: 3px 3px 3px 0 #e3e3e3;*/
+            border: 1px solid #c3c3c3;
+            height: 100px;
+            margin: 0px 0 0 0px;
+        }
+        
+       
+
+    </style>
+
+    <!--<label class="col-md-3 col-form-label" for="file-input">Thumbnail</label>-->
+    <div class="col-md-12" style="margin-bottom: 40px">
+        <div ng-if="!isDisabledUpload">
+        <!--for multiple file-->
+            <br/>
+        <input type="file" nv-file-select="" uploader="uploader" multiple />
+        <!--for single file-->
+        <!--<input ng-if='!isMultipleUpload' type="file" nv-file-select="" uploader="uploader" multiple />-->
+        </div>
+        <br/>
+        <br>
+        {{hint}}
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th width="80%">Name</th>
+                    <th ng-show="uploader.isHTML5">Size</th>
+                    <!--<th ng-show="uploader.isHTML5">Progress</th>-->
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="item in uploader.queue">
+                <tr>
+                    <td>
+                        <strong>{{ item.formData.description?item.formData.description:item.file.name }}</strong>
+                    </td>
+                    <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                    <!--<td ng-show="uploader.isHTML5">
+                        <div class="progress" style="margin-bottom: 0;">
+                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                        </div>
+                    </td>-->
+                    <td nowrap>
+                        <button type="button" ng-if="showUploadBtn" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.id || item.isReady || item.isUploading || item.isSuccess || isDisabledUpload">
+                            <span class="glyphicon glyphicon-upload"></span> Upload
+                        </button>
+                        <button type="button" ng-if="showReplaceBtn"class="btn btn-danger btn-xs" ng-click="item.upload()" ng-disabled="item.id || item.isReady || item.isUploading || item.isSuccess || isDisabledUpload">
+                            <span class="glyphicon glyphicon-trash"></span> Replace
+                        </button>
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="removeItemFunc(item)" ng-disabled="isDisabledUpload">
+                            <span class="glyphicon glyphicon-trash"></span> Remove
+                        </button>
+                    </td>
+            
+                <tr ng-if="isSpecialcollection">
+                    <td colspan="4">
+                        <div style="width: 191px; height: 106px; border:3px double grey; display: block; text-align: center;
+                                    vertical-align: middle">
+                            <div  ng-show="uploader.isHTML5 && item._file" ng-thumb="{ file: item._file, height: {{previewImgHeight}}, width: {{previewImgWidth}},actualRatio:true }" ></div></div>
+                        
+                        
+                    </td>
+                </tr>
+                <tr ng-if="isAnother">
+                    <td colspan="4">
+                        <div ng-show="uploader.isHTML5 && item._file" ng-thumb="{ file: item._file, height: {{previewImgHeight}}, width: {{previewImgWidth}} }" ></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

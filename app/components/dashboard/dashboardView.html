@@ -1,0 +1,36 @@
+<form class="form-horizontal">    
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-dashboard"></i> Dashboard
+        </div>
+        <div class="card-body">
+            <div class="table-wrapper" >
+                <table class="table table-responsive" ng-if="$root.selectedRole.functions.indexOf('NOMINATION_VIEW')!== -1"  >
+                    <thead>
+                        <tr>
+                            <th>Pending Task </th>
+                            <th>Total Number</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a  >Pending appointment</a>
+                            </td>
+                            <td style="text-align: center;">
+                                <a  href="" ng-click="ctrl.directFunc()">{{ctrl.nominationNumber}}</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-if="$root.selectedRole.functions.indexOf('NOMINATION_VIEW')=== -1" >
+                    <h1>No Data Available</h1></div>
+               <!-- <table class="table table-responsive" ng-if="$root.selectedRole.functions.indexOf('NOMINATION_VIEW')=== -1"  >
+                    <h1>No Data Available</h1>
+                </table>-->
+                
+            </div>
+        </div>  
+    </div>    
+</form>

@@ -1,0 +1,114 @@
+<style>
+    
+    .navbar {
+        align-items: baseline;
+    }
+    
+    .card {
+        margin-top: 10px;
+    }
+    .unstyled::-webkit-inner-spin-button{
+        display: none;
+    }
+    .unstyled::-webkit-calendar-picker-indicator {
+     
+        -webkit-appearance: ;
+    }
+</style>
+
+<!--no. of archived inside-->
+<!--start date and end date doest seem applicable -->
+<form class="form-horizontal">
+    <div class="card">
+        <div class="card-header"> <span class="fa fa-star"></span> AppointmentList
+            <div class="pull-right">
+                <export-filtered-row-fn  class="btn" method="ctrl.downloadCsv()" filename="specialCollections.csv" /> 
+                <button type="button" class="btn btn-outline-primary my-2 my-sm-0"  ui-sref="appointment.create"> 
+                    <span class="fa fa-upload"></span> upload New Appointment</button>
+               
+                <!-- Once created dont allow to delete. can only unpublish? -->
+                <!-- <button class="btn btn-outline-danger"> 
+                        <span class="fa fa-trash"></span> Delete </button>   -->
+        </div>
+        </div>
+        <div class="card-body">
+            
+            <div class="table-wrapper" st-table="ctrl.appointments" st-pipe="ctrl.paginate">
+                
+                <table class="table table-responsive table-striped" >
+                    <thead>
+                        <tr>
+                            <th style="min-width: 200px; max-width: 200px;">
+                                <div style="padding-bottom:5px"><i class="fa fa-fw fa-sort" st-sort="id"></i> 
+                                    Appointment ID</div>
+                                <div style="margin-left: 20px;margin-top: 5px"><button class="btn btn-default btn-sm fa fa-eraser" st-reset-search uib-tooltip="Clear filters" ng-click="ctrl.clearDate()"></button></div>
+                               <!-- <div style="padding-bottom: 43px" >Featured</div> </th>-->
+                            <th style="min-width: 110px;max-width: 110px;">
+                                <div style="padding-bottom:5px" ><i class="fa fa-fw fa-sort" st-sort="statusCode"></i> Status</div>
+                                <select st-search="statusName" placeholder="Search" st-input-event="change keydown" class="input-sm form-control" style="height: 34px;padding-left: 3px;padding-right: 0px;">
+                                    <option value=""></option>
+                                    <option ng-repeat="status in ctrl.allStatuses" value="{{status.name}}">{{status.name}}</option>
+                                </select>
+                            </th>
+                           
+                            
+                            <th style="min-width: 250px;max-width: 250px">
+                                <div style="padding-bottom:5px"><i class="fa fa-fw fa-sort" st-sort="publishedDate"></i> Start Time </div>
+                                
+                                <input class=" form-control" type="text" date-time id="pickerToUpdateMaxDate1" ng-model="ctrl.searchStartDate" view="date" format="DD MMM YYYY" min-view="date"  auto-close="true"
+                                       date-change="changeMinDate" placeholder=" Start Time">
+                             
+                               
+                            </th>
+                            <th style="min-width: 250px;max-width: 250px">
+                                <div style="padding-bottom:5px"><i class="fa fa-fw fa-sort" st-sort="publishedDate"></i> End Time </div>
+
+                                <input class=" form-control" type="text" date-time id="pickerToUpdateMinDate1" ng-model="ctrl.searchEndDate" view="date" format="DD MMM YYYY"  min-view="date" max-view="year" auto-close="true"
+                                       date-change="changeMaxDate" placeholder="End Time"> 
+
+
+                            </th>
+                            
+                           
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat=" appointment in ctrl.appointments ">
+                            <td class="text-center" style="text-align: center"><a href="" ng-click="ctrl.showDetailPage(appointment)">{{appointment.id}}</a></td>
+                            <td class="text-center"> 
+                                <span class="badge badge-danger" ng-model="appointment.statusCode" ng-if="appointment.statusName=='Rejected'">{{appointment.statusName}}</span> 
+                                <span class="badge badge-success" ng-model="appointment.statusCode" ng-if="appointment.statusName=='Approved'">{{appointment.statusName}}</span>
+                                <span class="badge badge-info" ng-model="appointment.statusCode" ng-if="appointment.statusName=='Pending'">{{appointment.statusName}}</span>
+                            </td>
+                           
+                            
+                            <td class="text-center">{{appointment.startTime | date:'dd MMM yyyy'}}</td>
+                            <td class="text-center">{{appointment.endTime | date:'dd MMM yyyy'}}</td>
+                           
+                            
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div style="padding-bottom: 15px;">
+                    <div st-template="app/shared/pagination/paginationView.html" st-pagination st-items-by-page="ctrl.searchDTO.pageSize" 
+                         st-page-change="pageOffset=(newPage-1)*searchDTO.pageSize"></div>
+                </div>
+            
+            </div>
+            <div class="card-footer"> Legends
+               <!-- <dl class="row"> 
+                    <dt class="col-sm-1" style=" min-width: 67px; padding-bottom: 5px;"><span class="btn btn-info action-btn fa fa-check"></span></dt>
+                    <dd class="col-sm-11">Featured collection (Top 4 in public website) </dd> 
+                    <dt class="col-sm-1"style=" min-width: 67px;padding-bottom: 5px;"><span class="btn btn-danger action-btn fa fa-flag"></span></dt>
+                    <dd class="col-sm-11">Eligible to set as featured collection (Top 4 in public website)</dd>
+                    <dt class="col-sm-1" style=" min-width: 67px;padding-bottom: 5px;"><span class="badge badge-danger">Draft</span></dt>
+                    <dd class="col-sm-11">Draft Copy, Not published to public website</dd> 
+                    <dt class="col-sm-1"style=" min-width: 67px;padding-bottom: 5px;"><span class="badge badge-success">Published</span></dt>
+                    <dd class="col-sm-11">Published to public website</dd>
+                </dl>-->
+            </div>
+        </div>
+    </div>
+</form>

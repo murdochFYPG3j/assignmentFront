@@ -1,0 +1,34 @@
+<div class="row">
+    <form class="form-horizontal">
+        <div class="col-4">
+            <span class="text-left">Show
+                <select class="form-control form-control-sm input-sm" style="width:auto !important;display:inline; border-radius: 0.25rem; line-height: 1.25;" ng-model="stItemsByPage"
+                        ng-options="key for (key , value) in {'10' : 10, '20' : 20, '50' : 50, '100' : 100 } ">
+                </select> records per page
+            </span>
+        </div>
+        <div class="col-8">
+            <ul class="my-0 pagination pull-right" ng-if="totalItemCount > 0">
+                <li class="no-animation" ng-if="currentPage > 1">
+                    <a href="" ng-click="selectPage(1)">First</a>
+                </li>
+                <li class="no-animation" ng-if="currentPage > 1">
+                    <a href="" ng-click="selectPage(currentPage-1)">&lt;</a>
+                </li>
+                <li class="no-animation" ng-repeat="page in pages" ng-class="{active: page==currentPage}">
+                    <a href="" ng-click="selectPage(page)">{{page}}</a>
+                </li>
+                <li class="no-animation" ng-if="currentPage < numPages">
+                    <a href="" ng-click="selectPage(currentPage+1)">></a>
+                </li>
+                <li class="no-animation" ng-if="currentPage < numPages">
+                    <a href="" ng-click="selectPage(numPages)">Last</a>
+                </li>
+                <li>
+                    <a style="color:black">Total records: {{totalItemCount | number}}</a>
+                </li>
+            </ul>       
+        </div>
+    </form>
+</div>
+  

@@ -1,0 +1,11 @@
+{
+    "scripts": {
+		"postinstall": "wiredep -s index.html",
+		"postuninstall": "wiredep -s index.html"
+    },
+    "registry": {
+    "search": [
+        "https://registry.bower.io"
+    ]
+}
+}

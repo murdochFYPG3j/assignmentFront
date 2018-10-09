@@ -1,0 +1,69 @@
+<form class="form-horizontal">    
+    <div class="card">
+        <div class="card-header">
+            <i class="fa fa-user"></i> Role Management  
+            <div class="pull-right">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="create" ng-click="createNewUser()"><span class="fa fa-submit"></span> Creat New User </button> 
+            </div>
+        </div>
+        <div class="card-body"> 
+            <div class="table-wrapper" st-table="ctrl.users" st-pipe="ctrl.paginate">
+
+                <table class="table table-responsive table-striped" >
+                    <thead>
+                        <tr>
+                            <th style="min-width: 200px; max-width: 200px;">
+                                <div style="padding-bottom:5px"><i class="fa fa-fw fa-sort" st-sort="id"></i> 
+                                    User ID</div>
+                            </th>
+                               
+                            <th style="min-width: 200px; max-width: 200px;">
+                                <div style="padding-bottom:5px"><i class="fa fa-fw fa-sort" st-sort="id"></i> 
+                                    User name</div>
+                            </th>
+
+                            <th style="min-width: 200px; max-width: 200px;">
+                                <div style="padding-bottom:5px"><i class="fa fa-fw fa-sort" st-sort="id"></i> 
+                                    User email</div>
+                            </th>
+
+
+                            <th style="min-width: 200px; max-width: 200px;">
+                                <div style="padding-bottom:5px"><i class="fa fa-fw fa-sort" st-sort="id"></i> 
+                                    User contactNo</div>
+                            </th>
+
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat=" user in ctrl.users ">
+                            <td class="text-center" style="text-align: center"><a href="" ng-click="ctrl.showDetailPage(user)">{{user.id}}</a></td>
+                            <td class="text-center"> 
+                                {{user.name}}
+                            </td>
+                            <td class="text-center"> 
+                                {{user.emailAddress}}
+                            </td>
+                            <td class="text-center"> 
+                                {{user.contact}}
+                            </td>
+
+
+
+
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="padding-bottom: 15px;">
+                    <div st-template="app/shared/pagination/paginationView.html" st-pagination st-items-by-page="ctrl.searchDTO.pageSize" 
+                         st-page-change="pageOffset=(newPage-1)*searchDTO.pageSize"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>    
+</form>

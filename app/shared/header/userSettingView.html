@@ -1,0 +1,19 @@
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false"> Welcome {{$root.username}} ({{$root.selectedRole.name}}) </a>
+    
+    
+    <div class="dropdown-menu dropdown-menu-right">
+
+        <div class="dropdown-header text-center">
+            <strong>Role</strong>
+        </div>
+
+        <div ng-repeat="role in $root.userRoleFunctions">
+            <button type="button" class="dropdown-item" ng-click="updateSelectedRole(role)">
+                <i class="fa fa-check" ng-if="role.code == $root.selectedRole.code"></i>{{role.name}}
+            </button>
+        </div>
+        <hr>            
+        <a class="dropdown-item" href={{logoutUrl}}><i class="fa fa-lock"></i>Logout</a>
+    </div>
+</li> 

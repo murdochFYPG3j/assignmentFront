@@ -1,0 +1,13 @@
+<div class="modal-header" >
+    <h3 class="modal-title">{{ctrl.appointment.id}}</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <input type="time" ng-disabled="ctrl.appointment.statusCode !='PENDING'" ng-model="ctrl.appointment.startTime"></div>
+    <div class="row">
+        <input type="time" ng-disabled="ctrl.appointment.statusCode !='PENDING'" ng-model="ctrl.appointment.endTime"></div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="save()">save</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+</div>

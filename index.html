@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<title>FYP</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+        
+        <!-- bower:css -->
+        <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+        <link rel="stylesheet" href="bower_components/angular-toggle-switch/angular-toggle-switch.css" />
+        <link rel="stylesheet" href="bower_components/angularjs-slider/dist/rzslider.css" />
+        <link rel="stylesheet" href="bower_components/bootstrap-select/dist/css/bootstrap-select.css" />
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+        <link rel="stylesheet" href="bower_components/metisMenu/dist/metisMenu.css" />
+        <link rel="stylesheet" href="bower_components/font-roboto/dist/styles/roboto.css" />
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="bower_components/sweetalert2/dist/sweetalert2.css" />
+        <link rel="stylesheet" href="bower_components/angular-bootstrap-toggle-switch/style/bootstrap3/angular-toggle-switch-bootstrap-3.css" />
+        <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+        <link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker.css" />
+        <!-- endbower -->
+        
+         <link rel="stylesheet" href="assets/css/was-admin-sidebar.css" /> 
+        <link rel="stylesheet" href="assets/css/was-admin.css" />
+        <link rel="stylesheet" href="assets/css/was-main.css" />
+        <link rel="stylesheet" href="assets/css/angular-datepicker.css" />
+
+    </head>
+
+    <body >
+        <div ng-app="was-admin">
+			<div ui-view class="no-animation"></div>            
+		</div>
+        
+        <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="bower_components/chart.js/dist/Chart.js"></script>
+        <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-toggle-switch/angular-toggle-switch.js"></script>
+        <script src="bower_components/angular-touch/angular-touch.js"></script>
+        <script src="bower_components/angular-ui-mask/dist/mask.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <script src="bower_components/angularjs-slider/dist/rzslider.js"></script>
+        <script src="bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+        <script src="bower_components/angular-bootstrap-multiselect/dist/angular-bootstrap-multiselect.js"></script>
+        <script src="bower_components/lodash/lodash.js"></script>
+        <script src="bower_components/metisMenu/dist/metisMenu.js"></script>
+        <script src="bower_components/moment/moment.js"></script>
+        <script src="bower_components/oclazyload/dist/ocLazyLoad.js"></script>
+        <script src="bower_components/restangular/dist/restangular.js"></script>
+        <script src="bower_components/underscore/underscore.js"></script>
+        <script src="bower_components/tether/dist/js/tether.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="bower_components/sweetalert2/dist/sweetalert2.js"></script>
+        <script src="bower_components/angular-sweetalert-2/SweetAlert.js"></script>
+        <script src="bower_components/angular-bootstrap-toggle-switch/angular-toggle-switch.js"></script>
+        <script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+        <script src="bower_components/angular-smart-table/dist/smart-table.js"></script>
+        <script src="bower_components/tinymce/tinymce.js"></script>
+        <script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+        <script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <script src="bower_components/TinyMCE-Placeholder/placeholder/plugin.js"></script>
+        <script src="bower_components/TinyMCE-Placeholder/placeholder/plugin.min.js"></script>
+        <script src="bower_components/promise-polyfill/dist/polyfill.min.js"></script>
+        <!-- endbower -->
+
+        <!-- core -->
+        <script src="app/app.routes.js"></script>
+        <script src="app/app.module.js"></script>	
+        <script src="app/app.constant.js"></script>
+        <script src="app/shared/header/headerDirective.js"></script>	
+        <script src="app/shared/sidebar/sidebarDirective.js"></script>
+        <script src="app/shared/pagination/paginationDirective.js"></script>
+        <script src="app/shared/upload-image/uploadImageDirective.js"></script>
+        <script src="app/shared/header/userSettingDirective.js"></script>
+        <script src="app/shared/login/loginService.js"></script>
+        
+        <script src="app/shared/common-features/SmartTableDirective.js"></script>
+     	<script src="app/shared/common-features/TabFixDirective.js"></script>
+        <script src="app/shared/common-features/IconClickDirective.js"></script>
+        <script src="app/shared/common-features/TextTruncateFn.js"></script>
+        <script src="app/shared/common-features/ExportFilteredRowFn.js"></script>
+        <script src="app/shared/common-services/PaginationService.js"></script>
+        <script src="app/shared/common-services/AlertService.js"></script>
+        <script src="app/shared/common-features/datePickerDirective.js"></script>
+        <script src="app/shared/common-services/SiteMapService.js"></script>
+        
+        <!-- external libary -->
+        <script src="assets/js/sb-admin-2.js"></script>
+        <script src="assets/js/angular-datePicker.js"></script>
+    </body>
+</html>
