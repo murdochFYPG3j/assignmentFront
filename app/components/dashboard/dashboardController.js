@@ -12,7 +12,7 @@ angular.module('was-admin').controller('DashboardController', function ($scope, 
     };
     initial();
     ctrl.directFunc = function(){
-        $state.go('appoinmentManagement.list');
+        $state.go('appointmentManage.list');
     };
 
 

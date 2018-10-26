@@ -214,37 +214,7 @@ var routes = [
                 });
             }
         }
-    }, {
-        name: 'report.email',
-        url: '/email',
-        templateUrl: 'app/components/report/email/reportEmailView.html',
-        controller: 'ReportEmailController',
-        resolve: {
-            loadMyDirectives: function ($ocLazyLoad) {
-                return $ocLazyLoad.load({
-                    name: 'was-admin',
-                    files: [             
-                        'app/components/report/email/reportEmailController.js'
-                    ]
-                });
-            }
-        }
-    }, {
-        name: 'report.nomination',
-        url: '/nomination',
-        templateUrl: 'app/components/report/nomination/reportNominationView.html',
-        controller: 'ReportNominationController',
-        resolve: {
-            loadMyDirectives: function ($ocLazyLoad) {
-                return $ocLazyLoad.load({
-                    name: 'was-admin',
-                    files: [             
-                        'app/components/report/nomination/reportNominationController.js'
-                    ]
-                });
-            }
-        }
-    }, {
+    },  {
         name: 'userManagement',
         url: '/userManagement',
         templateUrl: 'app/shared/templateView.html',
@@ -272,6 +242,23 @@ var routes = [
                         'app/components/user-management/userManagementController.js',
                         'app/shared/confirmation/confirmationController.js',
                         'app/components/user-management/userManagementService.js'                        
+                    ]
+                });
+            }
+        }
+    },{
+        name: 'register',
+        url: '/register',
+        templateUrl: 'app/components/register/registerView.html',
+        controller: 'registerController',
+        controllerAs:'ctrl',
+        resolve: {
+            loadMyDirectives: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name: 'was-admin',
+                    files: [             
+                        'app/components/register/registerController.js',
+                        'app/components/register/registerService.js'                        
                     ]
                 });
             }

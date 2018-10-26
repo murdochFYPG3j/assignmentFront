@@ -20,10 +20,10 @@ angular.module('was-admin').controller('LoginController', function ($scope, $roo
         if (validateEmptyCredential()) {
             var credential = {
                 password: ctrl.password,
-                username: ctrl.username
+                email: ctrl.username
             };
-            console.log("this is login "+credential.password+credential.username);
-            if(credential.username=='user'&&credential.password=='password'){
+           /* console.log("this is login "+credential.password+credential.email);
+            if(credential.email=='user@gmail.com'&&credential.password=='password'){
                 $rootScope.username='zhangqiang';
                 $rootScope.selectedRole=[];
                 $rootScope.selectedRole.push({name:'user',
@@ -34,11 +34,11 @@ angular.module('was-admin').controller('LoginController', function ($scope, $roo
                 console.log('run');
                 ctrl.credentialDto=[];
                 ctrl.credentialDto.reason ='Wrong password, user name is user, password is password';
-            }
-          /*  LoginService.login(credential).then(function (result) {
+            }*/
+        LoginService.login(credential).then(function (result) {
                 console.info("result", result);
 
-                if (result.auth && result.status === Constants.AUTHENTICATED) {
+            if (result.access_token) {
 
                     $state.go('landing.view');
                     
@@ -47,10 +47,16 @@ angular.module('was-admin').controller('LoginController', function ($scope, $roo
                 } else {
                     ctrl.credentialDto = result;
                 }
-            });*/
+            });
         }
     }; 
-
+    ctrl.redirect=function(param){
+        if(param=='register'){
+            $state.go('register');
+        }else{
+            $state.go('forget-password');
+        }
+    }
     function validateEmptyCredential() {
         if (ctrl.loginForm.$valid)
             return true;
@@ -58,6 +64,7 @@ angular.module('was-admin').controller('LoginController', function ($scope, $roo
         return false;
     }
 
+    
     function init() {
         ctrl.credentialDto = {
             responseCode: null,

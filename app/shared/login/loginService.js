@@ -1,6 +1,6 @@
 angular.module('was-admin').service("LoginService", function (Restangular) {
 
-    var prefix = "api/v1/user/";
+    var prefix = "/auth/";
 
     this.login = function (credential) {
         return Restangular.all(prefix + "login").post(credential);

@@ -33,8 +33,8 @@
         </div>
         <div class="card-body">
             
-            <div class="table-wrapper" st-table="ctrl.appointments" st-pipe="ctrl.paginate">
-                
+           <!-- <div class="table-wrapper" st-table="ctrl.appointments" st-pipe="ctrl.paginate">-->
+            <div class="table-wrapper"  st-table="appoinments" st-safe-src="ctrl.appointments">
                 <table class="table table-responsive table-striped" >
                     <thead>
                         <tr>
@@ -74,7 +74,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat=" appointment in ctrl.appointments ">
+                        <tr ng-repeat=" appointment in appoinments ">
                             <td class="text-center" style="text-align: center"><a href="" ng-click="ctrl.showDetailPage(appointment)">{{appointment.id}}</a></td>
                             <td class="text-center"> 
                                 <span class="badge badge-danger" ng-model="appointment.statusCode" ng-if="appointment.statusName=='Rejected'">{{appointment.statusName}}</span> 

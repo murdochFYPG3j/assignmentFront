@@ -24,9 +24,9 @@
                                 <div class="form-group" ng-class="{'has-danger' : (ctrl.loginForm.$submitted && ctrl.loginForm.username.$invalid) } ">
                                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                         <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                        <input type="text" class="form-control" placeholder="Username" name="username" ng-model="ctrl.username" ng-required="ctrl.loginForm.$submitted">                                        
+                                        <input type="email" class="form-control" placeholder="Email" name="userEmail" ng-model="ctrl.username" ng-required="ctrl.loginForm.$submitted">                                        
                                     </div>
-                                    <div class="form-control-feedback" ng-show="ctrl.loginForm.username.$error.required">Username cannot be empty.</div>
+                                    <div class="form-control-feedback" ng-show="ctrl.loginForm.userEmail.$error.required">Email cannot be empty.</div>
                                 </div>                                          
                                 <div class="form-group" ng-class="{'has-danger' : (ctrl.loginForm.$submitted && ctrl.loginForm.password.$invalid) } ">
                                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
@@ -36,8 +36,8 @@
                                     <div class="form-control-feedback" ng-show="ctrl.loginForm.password.$error.required">Password cannot be empty.</div>
                                 </div>  
                                 <div class="row" style="margin-bottom: 10px">
-                                    <div class="col-6"><a href="" style="margin-left: 30%">Register</a></div>
-                                    <div class="col-6"><a href="" style="margin-left: 30%">Forgot password</a></div>
+                                    <div class="col-6"><a href="" ng-click="ctrl.redirect('register')" style="margin-left: 30%">Register</a></div>
+                                    <div class="col-6"><a href="" ng-click="ctrl.redirect('forget')"  style="margin-left: 30%">Forgot password</a></div>
                                 
                                 </div>
                                 <div class="row">
