@@ -263,5 +263,23 @@ var routes = [
                 });
             }
         }
+    },
+    {
+        name: 'forget-password',
+        url: '/forget-password',
+        templateUrl: 'app/components/forgetPassword/forgetPasswordView.html',
+        controller: 'forgetPasswordController',
+        controllerAs:'ctrl',
+        resolve: {
+            loadMyDirectives: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name: 'was-admin',
+                    files: [             
+                        'app/components/forgetPassword/forgetPasswordCtrl.js',
+                        'app/components/forgetPassword/forgetPasswordService.js'                        
+                    ]
+                });
+            }
+        }
     } 
 ];

@@ -1,0 +1,155 @@
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<style>
+    .form-group {
+        margin-bottom: 0;
+    }
+    .col-md-7 column {  
+        text-align:center;
+    }
+    .col-md-7 column form {
+        display:inline-block;
+    }
+    label, input {
+        font-family: sans-serif;
+    }
+    .img-section{
+        background: url('assets/img/pick-bg.jpg')no-repeat;
+        background-size: 100% 100%;
+        color: #fff;
+    }
+    .img-section .section-title{
+        color: #fff;
+    }
+</style>
+
+<section class="col-md-6" style="margin-left: 25%">
+    <div class="img-section"  >
+        <div class="container">
+            <div class="banner banner-webpage">
+                <div class="row">
+                    <div class="col">
+                        <div class="pick-description">
+                            <h3 class="py-2 text-center">Register</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card"  style="display: flex;
+                              justify-content: center;
+                              align-items: center;
+                              font-family: sans-serif">
+    
+        <div class="card-body" style="display: flex;
+                                      justify-content: center;
+                                      align-items: center; width: 100%">
+        <form class="col-md-12 form-horizontal" name="submitNominationForm" novalidate>
+            <!--<div  role="alert" style="color:red">
+                <p><span class="error" ng-if="ctrl.resultEmail || ctrl.resultName || ctrl.resultWeb ||ctrl.resultReason||ctrl.resultFlag" ><i class="fa fa-warning" >&nbsp</i>
+                    Please complete the form</span>
+                </p>
+            </div>-->
+            <div style="margin-top: 1em; margin-bottom: 1.5em">
+                <p style="margin-bottom: 25px">Only Murdoch student and staff can register  </p>
+               
+               
+            </div>
+            <hr>
+            <div class="row" style="margin-bottom: 20px">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label class="text-left"> First Name </label>
+                        <input class="form-control" type="text" name="username" ng-change="ctrl.checkName()"  ng-model="ctrl.firstName" placeholder="Name of nominator" maxlength="255" required>
+                        <div class="icon-container-remove" style="color:red">
+                            <span ng-if="ctrl.firstNameInvalid"><a ><i class="fa fa-warning"  >&nbsp</i>First name cannot be blank </a></span>
+                           
+                        </div>
+                    </div>            
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label class="text-left">Last Name </label>
+                        <input class="form-control" type="text" name="lastName" ng-change="ctrl.checkLastName()"  ng-model="ctrl.lastName" placeholder="Name of nominator" maxlength="255" required>
+                        <div class="icon-container-remove" style="color:red">
+                            <span ng-if="ctrl.lastNameInvalid"><a ><i class="fa fa-warning"  >&nbsp</i>Last Name cannot be blank </a></span>
+                            
+                        </div>
+                    </div>            
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label class="text-left">Email </label>
+                        <input class="form-control" type="text" name="userEmail" ng-change="ctrl.checkEmail()" ng-model="ctrl.email" placeholder="Email address of nominator" maxlength="255" autocomplete="off" required>
+                    </div>
+                    <div  role="alert" style="color:red">
+                        <p><span class="error" ng-if="ctrl.emailInvalid" ><i class="fa fa-warning" >&nbsp</i>Invalid email address format</span>
+                            <span class="error" ng-if="ctrl.emailEmpty" ><i class="fa fa-warning" >&nbsp</i>Email address cannot be blank</span>
+                            <span ng-if="ctrl.emailExceed"><a ><i class="fa fa-warning"  >&nbsp</i>Email address cannot exceed 255 character ({{ctrl.email.length}} character)</a></span>
+                        </p>
+                    </div>
+                </div>
+            
+               
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label class="text-left">Choose your user type </label>
+                        <select class="form-control"  name="userCopyright"  ng-change="ctrl.checkFlag()"
+                                ng-model="ctrl.userType" requested>
+                            <option value="" selected disabled>Please Select</option>
+                            <option ng-repeat="type in ctrl.userTypes" value="{{type.code}}">{{type.name}}</option>
+                        </select>
+                    </div>
+                    <div role="alert" style="color:red" >
+                        <p><span class="error" ng-if="ctrl.copyrightInvalid " ><i class="fa fa-warning" >&nbsp</i>Please select a value</span>
+                        </p>
+                    </div>
+                </div>
+               
+            </div>
+            
+            <div class="row" style="margin-bottom: 20px">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label class="text-left"> Enter your Password </label>
+                        <input class="form-control" type="password" name="password" ng-change="ctrl.checkFirstPassword()"  ng-model="ctrl.password" placeholder="password" maxlength="255" required>
+                        <div class="icon-container-remove" style="color:red">
+                            <span ng-if="ctrl.firsPasswordInvalid"><a ><i class="fa fa-warning"  >&nbsp</i>password cannot be blank </a></span>
+                            
+                        </div>
+                    </div>            
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label class="text-left"> Enter your Password Again </label>
+                        <input class="form-control" type="passowrd" name="lastName" ng-change="ctrl.checkSecondPassword()"  ng-model="ctrl.secondPassword" placeholder="Enter password again" maxlength="255" required>
+                        <div class="icon-container-remove" style="color:red">
+                            <span ng-if="ctrl.secondPasswordInvalid"><a ><i class="fa fa-warning"  >&nbsp</i>password cannot be blank </a></span>
+                            <span ng-if="ctrl.passwordNotEqual"><a ><i class="fa fa-warning"  >&nbsp</i>password must be same</a></span>
+                        </div>
+                    </div>            
+                </div>
+            </div>
+
+                
+                <div class="col-12 col-md-12">
+                    <div class="g-recaptcha" data-sitekey="6LcJX04UAAAAAMBGKENVfhSdwgyPV2v_8P88hcZt"></div>
+                   
+                </div>
+               
+                
+                <div class="col-12 col-md-12 mt-3 ">
+                    <button class="btn btn-primary btn-block" style="height:37px;margin-bottom: 3rem"  ng-click="ctrl.checkSubmitNomination()">Submit</button>
+                </div>
+               
+            
+        </form>
+    </div>
+        </div>
+
+    </div>
+  
+</section>
