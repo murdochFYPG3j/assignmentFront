@@ -1,7 +1,7 @@
 <div class="sidebar">
     <nav class="sidebar-nav">
         <ul class="nav">                                
-            <span ng-if="$state.includes('examples')">
+           <!-- <span ng-if="$state.includes('examples')">
                 <li class="nav-title" >
                     Examples
                 </li>
@@ -10,18 +10,21 @@
                     <a class="nav-link" ng-class="{active: $state.includes('examples.table')}" ui-sref="examples.table"><i class="icon-puzzle"></i> Table</a> 
                 </li>
                 <li class="divider"></li>
-            </span>
-            <span ng-if="$state.includes('specialCollection')">
+            </span>-->
+            <span ng-if="$state.includes('appointment')">
                 <li class="nav-title">
-                    <i class="fa fa-star"></i> Special Collections
+                    <i class="fa fa-star"></i> Functions
                 </li>
-                <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('specialCollection')}">                
-                    <a class="nav-link" ng-class="{active: $state.includes('specialCollection.list')}" ui-sref="specialCollection.list">
-                        <i class="fa fa-star"></i> List All Special Collections
+                <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('appointment')}">                
+                    <a class="nav-link" ng-class="{active: $state.includes('appointment.list')}" ui-sref="appointment.list">
+                        <i class="fa fa-star"></i> View Available Appointments
                     </a>   
-                    <a class="nav-link" ng-if="$root.selectedRole.functions.indexOf('SPECIAL_COLLECTION_EDIT')!== -1" ng-class="{active: $state.includes('specialCollection.create')}" ui-sref="specialCollection.create">
-                        <i class="fa fa-plus"></i> Create Special Collection
+                    <a class="nav-link" ng-class="{active: $state.includes('appointment.create')}" ui-sref="appointment.create">
+                        <i class="fa fa-plus"></i> Book An Appointment
                     </a>   
+                  <!--  <a class="nav-link"  ng-class="{active: $state.includes('appointment.detail')}" ui-sref="appointment.detail">
+                        <i class="fa fa-plus"></i> Request to Appointment
+                    </a>   -->
                 </li>  
             </span>
             <span ng-if="$state.includes('nomination')">
@@ -59,35 +62,7 @@
                     </a>                       
                 </li>
             </span>
-            <span ng-if="$state.includes('report')">
-                <li class="nav-title">
-                    <i class="fa fa-clipboard"></i> Reports
-                </li>
-                <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('report')}">                
-                    <a class="nav-link" ng-class="{active: $state.includes('report.system')}" ui-sref="report.system">
-                        <i class="fa fa-clipboard"></i> System Logs 
-                    </a> 
-                    <a class="nav-link" ng-class="{active: $state.includes('report.email')}" ui-sref="report.email">
-                        <i class="fa fa-clipboard"></i> Email Logs
-                    </a>
-                    <a class="nav-link" ng-class="{active: $state.includes('report.nomination')}" ui-sref="report.nomination">
-                        <i class="fa fa-clipboard"></i> Nomination Report
-                    </a>
-                    <a class="nav-link" href="" ng-click="generateSitemap()">
-                        <i class="fa fa-download"></i> Generate Sitemap 
-                    </a>
-                </li>   
-            </span>
-            <span ng-if="$state.includes('role')">
-                <li class="nav-title">
-                    <i class="fa fa-user"></i> Role Management
-                </li>
-                <li class="nav-item nav-dropdown" ng-class="{open: $state.includes('role')}">                
-                    <a class="nav-link" ng-class="{active: $state.includes('role.system')}" ui-sref="role.system">
-                        <i class="fa fa-user"></i> Edit Role
-                    </a> 
-                </li>   
-            </span>
+         
         </ul>
     </nav>
 </div>

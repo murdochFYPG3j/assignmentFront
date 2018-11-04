@@ -10,17 +10,17 @@
             <a class="nav-link" href=""  ng-click="ctrl.redirect('DASHBOARD')"><i class="fa fa-dashboard"></i> </a>
         </li>-->
        
-        <li class="nav-item px-3" ng-if="$root.selectedRole.code=='user'">
+        <li class="nav-item px-3" ng-if="$root.selectedRoleCode=='user'">
             <a class="nav-link" href=""  ng-click="ctrl.redirect('APP')"><i class="fa fa-star"></i> Appoinment</a>
         </li>
-        <li class="nav-item px-3" ng-if="$root.selectedRole.code=='user'" >
+        <li class="nav-item px-3" ng-if="$root.selectedRoleCode=='user'" >
             <a class="nav-link" href=""  ng-click="ctrl.redirect('PROFILE')"><i class="fa fa-book"></i> User profile</a>
         </li>      
     
-        <li class="nav-item px-3" ng-if="$root.selectedRole.code=='convener'">
+        <li class="nav-item px-3" ng-if="$root.selectedRoleCode=='convener'">
             <a class="nav-link"  href="" ng-click="ctrl.redirect('APP_MGMT')"><i class="fa fa-clipboard"></i> Appointment Management</a>
         </li> 
-        <li class="nav-item px-3" ng-if="$root.selectedRole.code=='admin'||$root.selectedRole.code=='convener'">
+        <li class="nav-item px-3" ng-if="$root.selectedRoleCode=='admin'||$root.selectedRoleCode=='convener'">
             <a class="nav-link"  href="" ng-click="ctrl.redirect('USER_MGMT')"><i class="fa fa-user"></i> User Management</a>
         </li>        
     </ul>

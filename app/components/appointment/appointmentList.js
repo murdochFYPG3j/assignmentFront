@@ -26,6 +26,31 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
             ctrl.allStatuses = data[1];
             
         });*/
+        ctrl.appointments=[{id:1,
+                            statusName:'Pending',
+                            statusCode:'PENDING',
+                            startTime:new Date(),
+                            endTime:new Date()},
+                           {id:2,
+                            statusName:'Approved',
+                            statusCode:'APROVED',
+                            startTime:new Date(),
+                            endTime:new Date()},
+                           {id:3,
+                            statusName:'Rejected',
+                            statusCode:'REJECTED',
+                            startTime:new Date(),
+                            endTime:new Date()}];
+        /* var resultPromise = SpecialCollectionService.getAllSpecialCollection(ctrl.mergedSearchDTO);
+            $q.all([resultPromise]).then(function (data) {
+                PaginationService.setPaginationResult(ctrl, tableState, data);
+                ctrl.websites = ctrl.records;
+
+
+
+            });*/
+
+  
        
     };
     ctrl.initial();

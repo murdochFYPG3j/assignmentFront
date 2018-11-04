@@ -209,7 +209,9 @@ var routes = [
                 return $ocLazyLoad.load({
                     name: 'was-admin',
                     files: [             
-                        'app/components/appointmentManage/appointmentManageController.js'
+                        'app/components/appointmentManage/appointmentManageController.js',
+                        'app/components/appointmentManage/appointmentManageService.js',
+                        'app/shared/upload/uploadController.js'
                     ]
                 });
             }

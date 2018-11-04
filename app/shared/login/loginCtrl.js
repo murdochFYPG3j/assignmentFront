@@ -22,32 +22,32 @@ angular.module('was-admin').controller('LoginController', function ($scope, $roo
                 password: ctrl.password,
                 email: ctrl.username
             };
-           /* console.log("this is login "+credential.password+credential.email);
+            console.log("this is login "+credential.password+credential.email);
             if(credential.email=='user@gmail.com'&&credential.password=='password'){
                 $rootScope.username='zhangqiang';
-                $rootScope.selectedRole=[];
-                $rootScope.selectedRole.push({name:'user',
-                                        code:'user'})
+               //var role=[];
+                /*LoginService.login(credential).then(function (result) {
+                console.info("result", result);
+
+            if (result.access_token) {
+
+                    $state.go('landing.view');
+
+
+
+                } else {
+                    ctrl.credentialDto = result;
+                }
+            });*/
+                $rootScope.selectedRoleCode='user';
                 $state.go('landing.view');
                 
             }else{
                 console.log('run');
                 ctrl.credentialDto=[];
                 ctrl.credentialDto.reason ='Wrong password, user name is user, password is password';
-            }*/
-        LoginService.login(credential).then(function (result) {
-                console.info("result", result);
-
-            if (result.access_token) {
-
-                    $state.go('landing.view');
-                    
-                  
-                    
-                } else {
-                    ctrl.credentialDto = result;
-                }
-            });
+            }
+        
         }
     }; 
     ctrl.redirect=function(param){

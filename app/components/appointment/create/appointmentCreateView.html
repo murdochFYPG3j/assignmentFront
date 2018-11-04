@@ -1,3 +1,8 @@
+<style>
+    .myOwnBg {
+        background-color: #959595;
+    }
+</style>
 <div class="card">
     <div class="card-header"> <span class="fa fa-plus"></span> Create New Appointment
         <div class="pull-right">
@@ -5,7 +10,138 @@
             <button class="btn btn-outline-danger" type="button" ng-disabled="ctrl.titleInvalid||ctrl.descriptionInvalid||ctrl.uploadImageInvalid" ng-click="ctrl.createSpecialCollection()"><span class="fa fa-save"></span> Save Appointment</button>
         </div>
     </div>
+    <div class="card-body">
+        
+        <div class="table table-striped" st-table="appointmentsVar" st-safe-src="ctrl.appointmentMonths">
+            <table class="table table-responsive table-striped">
+                <thead>
+                    <tr>
+                        <th style="min-width: 100px; max-width: 100px;">
+                            <div style="padding-bottom:5px">
+                              Month</div>
+                            <select>
+                            <option>Nov</option>
+                            <option>Dec</option>
+                            </select>
+                          </th>
+                        <th style="min-width: 100px; max-width: 100px;">
+                            <div style="padding-bottom:5px">
+                                 Monday</div>
+                        </th>
+                        <th style="min-width: 100px; max-width: 100px;">
+                            <div style="padding-bottom:5px">
+                                 Tuesday</div>
+                        </th>
+                        <th style="min-width: 100px; max-width: 100px;">
+                            <div style="padding-bottom:5px">
+                                Webnsday</div>
+                        </th>
+                        <th style="min-width: 100px; max-width: 100px;">
+                            <div style="padding-bottom:5px">
+                                Thusday</div>
+                        </th>
+                        <th style="min-width: 100px; max-width: 100px;">
+                            <div style="padding-bottom:5px">
+                                 Friday</div>
+                        </th>
+                        <th style="min-width: 100px; max-width: 100px;">
+                            <div style="padding-bottom:5px">
+                                Sarturday</div>
+                        </th>
+                        <th style="min-width: 100px; max-width: 100px;">
+                            <div style="padding-bottom:5px">
+                                Sunday</div>
+                        </th>
+                        <!-- <div style="padding-bottom: 43px" >Featured</div> </th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat=" week in appointmentsVar">
+                        <td style="min-width: 100px; max-width: 100px;"></td>
+                        <td ng-disbled="week.Monday.status=='full'">
+                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Monday.status=='full'}">
+                                <div>
+                                    <h1>{{week.Monday.day}}</h1></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Tuesday.status=='full'}">
+                                <div>
+                                    <h1>{{week.Tuesday.day}}</h1></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Wednesday.status=='full'}">
+                                <div>
+                                    <h1>{{week.Wednesday.day}}</h1></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Thuesday.status=='full'}">
+                                <div>
+                                    <h1>{{week.Thuesday.day}}</h1></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Friday.status=='full'}">
+                                <div>
+                                    <h1>{{week.Friday.day}}</h1></div>
+                            </div>
+                        </td>
+                        <td ng-click="ctrl.displayDay()">
+                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Saturday.status=='full'}">
+                                <div>
+                                    <button class="btn btn-sm btn-default"  data-toggle="modal" data-target="#{{week.Saturday.day}}" uib-tooltip="Click to create appointment" tooltip-placement="left" ng-if="week.Saturday.status!=='full'"> <h1>{{week.Saturday.day}}</h1> </button>
+                                    </div>
+                                <div ng-if="week.Saturday.status==='full'">
+                                    <h1>{{week.Saturday.day}}</h1></div>
+                            </div>
+                            
+                            <div class="modal fade" id="{{week.Saturday.day}}" tabindex="-1" role="dialog" aria-labelledby="Participants" aria-hidden="true">
 
-    </form>
-</div>
+                                <div class="modal-dialog" style="width:400px">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                           <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+                                            <h4 class="modal-title" id="myModalLabel">All available slot </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            
+                                            
+                                            <table class="table table-bordered table-striped table-responsive table-condensed small" style="width:100%" >
+                                                <tbody>
+                                                    <tr ng-repeat="slot in week.Saturday.slots">
+                                                       
+                                                        <td><input type="checkbox" ng-model="slot.isSelected"
+                                                                   ng-true-value="'YES'" ng-false-value="'NO'">{{slot.startTime}} - {{slot.endTime}}</td>
+                                                       
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn  btn-primary" ng-click="ctrl.saveAppintment(ctrl.reason,slots)">
+                                                save
+                                            </button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <!--<button type="button" class="btn btn-primary"  data-dismiss="modal" ng-click="checkStageName(competition.stageList,competition.tempStageList)">Save</button>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Sunday.status=='full'}">
+                                <div>
+                                    <h1>{{week.Sunday.day}}</h1></div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer"> Legends </div>
+    </div>
 </div>

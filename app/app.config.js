@@ -27,16 +27,12 @@ var shared = {
 
 
 var modules = {
-    SPECIAL_COLLECTION: 'SPECIAL_COLLECTION',
-    NOMIATION: 'NOMINATION',
-    REPORTS: 'REPORTS',
-    ROLE_MGMT: 'ROLE_MGMT'
+
 };
 
 
 var bannerType = {
-    BANNER_SCREEN_DESKTOP: "BANNER_SCREEN_DESKTOP",
-    BANNER_SCREEN_MOBILE: "BANNER_SCREEN_MOBILE"
+   
 };
 
 // 
@@ -63,35 +59,25 @@ var environments = {
     }
 };
 
-var development = {  
-    BASE_URL: 'http://localhost:8080/web/was-webservice-admin', 
-    LOGOUT_URL: 'https://ssoadmin-stg.nlb.gov.sg:83/OAuth2/Account/ExternalLogOff?returnUrl=https://wasadmin-stg.nlb.gov.sg:83/web/was-webservice-admin/api/v1/user/server-logout',
-    env: 'development'
-};
-
-var sit = {
-    BASE_URL: 'http://10.0.3.10:8080/web/was-webservice-admin', 
-    LOGOUT_URL: 'https://ssoadmin-stg.nlb.gov.sg:83/OAuth2/Account/ExternalLogOff?returnUrl=https://wasadmin-stg.nlb.gov.sg:83/web/was-webservice-admin/api/v1/user/server-logout',
-    env: 'sit'
-};
 
 var staging = {
-    BASE_URL: 'https://wasadmin-stg.nlb.gov.sg:83/web/was-webservice-admin', 
+    BASE_URL: 'https://wasadmin-stg.nlb.gov.sg:83/web/was-webservice-admin', //writeback the URL to link to end 
     LOGOUT_URL: 'https://ssoadmin-stg.nlb.gov.sg:83/OAuth2/Account/ExternalLogOff?returnUrl=https://wasadmin-stg.nlb.gov.sg:83/web/was-webservice-admin/api/v1/user/server-logout',
     env: 'staging'
 };
 
+/*
 var production = {
     BASE_URL: 'https://wasadmin.nlb.gov.sg:83/web/was-webservice-admin', 
     LOGOUT_URL: 'https://ssoadmin.nlb.gov.sg:83/OAuth2/Account/ExternalLogOff?returnUrl=https://wasadmin.nlb.gov.sg:83/web/was-webservice-admin/api/v1/user/server-logout',
     env: 'production'
 };
+*/
 
 //join shared and respective environment
-environments.development.Constants = Object.assign({}, shared, development);
-environments.sit.Constants = Object.assign({}, shared, sit);
+
 environments.staging.Constants = Object.assign({}, shared, staging);
-environments.production.Constants = Object.assign({}, shared, production);
+//environments.production.Constants = Object.assign({}, shared, production);
 
 
 //environments.production.buildpack  = process.env.BUILDPACK_URL;

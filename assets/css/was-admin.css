@@ -478,5 +478,455 @@
     border-radius: 5px;
 }
 
+.modal-open {
+    overflow: hidden;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    outline: 0;
+}
+
+.modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 0.5rem;
+    pointer-events: none;
+}
+
+.modal.fade .modal-dialog {
+    transition: -webkit-transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
+    transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+    -webkit-transform: translate(0, -25%);
+    transform: translate(0, -25%);
+}
+
+.modal.show .modal-dialog {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+
+.modal-dialog-centered {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    min-height: calc(100% - ( 0.5rem * 2));
+}
+
+.modal-content {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    outline: 0;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000;
+}
+
+.modal-backdrop.fade {
+    opacity: 0;
+}
+
+.modal-backdrop.show {
+    opacity: 0.5;
+}
+
+.modal-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #c2cfd6;
+}
+
+.modal-header .close {
+    padding: 1rem;
+    margin: -1rem -1rem -1rem auto;
+}
+
+.modal-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+.modal-body {
+    position: relative;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1rem;
+}
+
+.modal-footer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding: 1rem;
+    border-top: 1px solid #c2cfd6;
+}
+
+.modal-footer>:not (:first-child ) {
+    margin-left: .25rem;
+}
+
+.modal-footer>:not (:last-child ) {
+    margin-right: .25rem;
+}
+
+.modal-scrollbar-measure {
+    position: absolute;
+    top: -9999px;
+    width: 50px;
+    height: 50px;
+    overflow: scroll;
+}
+
+@media ( min-width : 576px) {
+    .modal-dialog {
+        max-width: 500px;
+        margin: 1.75rem auto;
+    }
+    .modal-dialog-centered {
+        min-height: calc(100% - ( 1.75rem * 2));
+    }
+    .modal-sm {
+        max-width: 300px;
+    }
+}
+
+@media ( min-width : 992px) {
+    .modal-lg {
+        max-width: 800px;
+    }
+}
+
+.modal-primary .modal-content {
+    border-color: #20a8d8;
+}
+
+.modal-primary .modal-header {
+    color: #fff;
+    background-color: #20a8d8;
+}
+
+.modal-secondary .modal-content {
+    border-color: #a4b7c1;
+}
+
+.modal-secondary .modal-header {
+    color: #fff;
+    background-color: #a4b7c1;
+}
+
+.modal-success .modal-content {
+    border-color: #4dbd74;
+}
+
+.modal-success .modal-header {
+    color: #fff;
+    background-color: #4dbd74;
+}
+
+.modal-info .modal-content {
+    border-color: #63c2de;
+}
+
+.modal-info .modal-header {
+    color: #fff;
+    background-color: #63c2de;
+}
+
+.modal-warning .modal-content {
+    border-color: #ffc107;
+}
+
+.modal-warning .modal-header {
+    color: #fff;
+    background-color: #ffc107;
+}
+
+.modal-danger .modal-content {
+    border-color: #f86c6b;
+}
+
+.modal-danger .modal-header {
+    color: #fff;
+    background-color: #f86c6b;
+}
+
+.modal-light .modal-content {
+    border-color: #f0f3f5;
+}
+
+.modal-light .modal-header {
+    color: #fff;
+    background-color: #f0f3f5;
+}
+
+.modal-dark .modal-content {
+    border-color: #29363d;
+}
+
+.modal-dark .modal-header {
+    color: #fff;
+    background-color: #29363d;
+}
+
+.modal-blue .modal-content {
+    border-color: #20a8d8;
+}
+
+.modal-blue .modal-header {
+    color: #fff;
+    background-color: #20a8d8;
+}
+
+.modal-indigo .modal-content {
+    border-color: #6610f2;
+}
+
+.modal-indigo .modal-header {
+    color: #fff;
+    background-color: #6610f2;
+}
+
+.modal-purple .modal-content {
+    border-color: #6f42c1;
+}
+
+.modal-purple .modal-header {
+    color: #fff;
+    background-color: #6f42c1;
+}
+
+.modal-pink .modal-content {
+    border-color: #e83e8c;
+}
+
+.modal-pink .modal-header {
+    color: #fff;
+    background-color: #e83e8c;
+}
+
+.modal-red .modal-content {
+    border-color: #f86c6b;
+}
+
+.modal-red .modal-header {
+    color: #fff;
+    background-color: #f86c6b;
+}
+
+.modal-orange .modal-content {
+    border-color: #f8cb00;
+}
+
+.modal-orange .modal-header {
+    color: #fff;
+    background-color: #f8cb00;
+}
+
+.modal-yellow .modal-content {
+    border-color: #ffc107;
+}
+
+.modal-yellow .modal-header {
+    color: #fff;
+    background-color: #ffc107;
+}
+
+.modal-green .modal-content {
+    border-color: #4dbd74;
+}
+
+.modal-green .modal-header {
+    color: #fff;
+    background-color: #4dbd74;
+}
+
+.modal-teal .modal-content {
+    border-color: #20c997;
+}
+
+.modal-teal .modal-header {
+    color: #fff;
+    background-color: #20c997;
+}
+
+.modal-cyan .modal-content {
+    border-color: #63c2de;
+}
+
+.modal-cyan .modal-header {
+    color: #fff;
+    background-color: #63c2de;
+}
+
+.modal-gray-100 .modal-content {
+    border-color: #f0f3f5;
+}
+
+.modal-gray-100 .modal-header {
+    color: #fff;
+    background-color: #f0f3f5;
+}
+
+.modal-gray-200 .modal-content {
+    border-color: #c2cfd6;
+}
+
+.modal-gray-200 .modal-header {
+    color: #fff;
+    background-color: #c2cfd6;
+}
+
+.modal-gray-300 .modal-content {
+    border-color: #a4b7c1;
+}
+
+.modal-gray-300 .modal-header {
+    color: #fff;
+    background-color: #a4b7c1;
+}
+
+.modal-gray-400 .modal-content {
+    border-color: #869fac;
+}
+
+.modal-gray-400 .modal-header {
+    color: #fff;
+    background-color: #869fac;
+}
+
+.modal-gray-500 .modal-content {
+    border-color: #678898;
+}
+
+.modal-gray-500 .modal-header {
+    color: #fff;
+    background-color: #678898;
+}
+
+.modal-gray-600 .modal-content {
+    border-color: #536c79;
+}
+
+.modal-gray-600 .modal-header {
+    color: #fff;
+    background-color: #536c79;
+}
+
+.modal-gray-700 .modal-content {
+    border-color: #3e515b;
+}
+
+.modal-gray-700 .modal-header {
+    color: #fff;
+    background-color: #3e515b;
+}
+
+.modal-gray-800 .modal-content {
+    border-color: #29363d;
+}
+
+.modal-gray-800 .modal-header {
+    color: #fff;
+    background-color: #29363d;
+}
+
+.modal-gray-900 .modal-content {
+    border-color: #151b1e;
+}
+
+.modal-gray-900 .modal-header {
+    color: #fff;
+    background-color: #151b1e;
+}
+
+.nav-tabs .nav-link, .nav-tabs .navbar .dropdown-toggle, .navbar .nav-tabs .dropdown-toggle
+{
+    color: #536c79;
+}
+
+.nav-tabs .nav-link:hover, .nav-tabs .navbar .dropdown-toggle:hover,
+.navbar .nav-tabs .dropdown-toggle:hover {
+    cursor: pointer;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .navbar .active.dropdown-toggle,
+.navbar .nav-tabs .active.dropdown-toggle {
+    color: #29363d;
+    background: #fff;
+    border-color: #a4b7c1;
+    border-bottom-color: #fff;
+}
+
+.nav-tabs .nav-link.active:focus, .nav-tabs .navbar .active.dropdown-toggle:focus,
+.navbar .nav-tabs .active.dropdown-toggle:focus {
+    background: #fff;
+    border-color: #a4b7c1;
+    border-bottom-color: #fff;
+}
+
+.tab-content {
+    margin-top: -1px;
+    background: #fff;
+    border: 1px solid #a4b7c1;
+}
+
+.tab-content .tab-pane {
+    padding: 1rem;
+}
+
+.card-block .tab-content {
+    margin-top: 0;
+    border: 0;
+}
+
+.app-header.navbar {
+    position: relative;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    height: 55px;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    border-bottom: 1px solid #a4b7c1;
+}
+
+
 
 

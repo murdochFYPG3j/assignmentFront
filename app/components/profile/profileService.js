@@ -1,4 +1,4 @@
-angular.module('was-admin').service("NominationService", function ($q, $rootScope, Restangular) {
+angular.module('was-admin').service("ProfileService", function ($q, $rootScope, Restangular) {
     var prefix = "api/v1/nomination";
 
 
@@ -6,10 +6,15 @@ angular.module('was-admin').service("NominationService", function ($q, $rootScop
         return Restangular.all(prefix + '/get-all-nominations').getList();
     };
 
-    this.editNominationForm = function (param) {
-        return Restangular.all(prefix + '/edit-nomination').post(param);
+    this.getUserDetail = function (param) {
+        return Restangular.all(prefix + '/get-user-detail').post(param);
+    };
+    
+    this.updateUserDetail = function (param) {
+        return Restangular.all(prefix + '/update-user-detail').post(param);
     };
      
+/*
     this.updateNominationForm = function (param) {
         return Restangular.all(prefix + '/update-nomination').post(param);
     };
@@ -41,5 +46,6 @@ angular.module('was-admin').service("NominationService", function ($q, $rootScop
     this.getRejectReasons=function(){
         return Restangular.all(prefix + "/get-reject-reason").getList();
     };
+*/
 
 });

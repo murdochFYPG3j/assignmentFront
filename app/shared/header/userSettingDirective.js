@@ -35,7 +35,7 @@ angular.module('was-admin').directive('userSetting', ['$location', function () {
             
             $scope.updateSelectedRole = function (role) {
                 
-                $rootScope.selectedRole=role;
+                $rootScope.selectedRoleCode=role.code;
                 console.log("$rootScope.selectedRole: " + JSON.stringify($rootScope.selectedRole, null, 2));
                 
                 $state.go('landing.view');
