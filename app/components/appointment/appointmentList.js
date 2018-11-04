@@ -1,4 +1,4 @@
-angular.module('was-admin').controller('AppointmentListController', function ($scope, $rootScope, $stateParams, $uibModal, SpecialCollectionService, Constants, $q, PaginationService, sweetAlert, MomentDateService,$state) {
+angular.module('was-admin').controller('AppointmentListController', function ($scope, $rootScope, $stateParams, $uibModal, AppoinmentService, Constants, $q, PaginationService, sweetAlert, MomentDateService,$state) {
     'use strict';
     var ctrl = this;
 

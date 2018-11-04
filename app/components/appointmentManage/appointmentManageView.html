@@ -109,7 +109,7 @@
                                         <h1>{{week.Friday.day}}</h1></div>
                                 </div>
                             </td>
-                            <td ng-click="ctrl.displayDay()">
+                            <td >
                                 <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Saturday.status=='full'}">
                                     <div>
                                         <button class="btn btn-sm btn-default"  data-toggle="modal" data-target="#{{week.Saturday.day}}" uib-tooltip="Click to create appointment" tooltip-placement="left" ng-if="week.Saturday.status!=='full'"> <h1>{{week.Saturday.day}}</h1> </button>
@@ -137,6 +137,13 @@
                                                 <div class="row">
                                                     <label>End time</label>
                                                     <input type="time" ng-model="ctrl.endTime">
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <label>location</label>
+                                                    <select>
+                                                    <option>Room1</option></select>
+                                                    <option>Room2</option>
                                                 </div>
                                                 <button ng-click="ctrl.createAppoinment(week.Saturday.slots)">Create</button>
 

@@ -61,8 +61,8 @@ var environments = {
 
 
 var staging = {
-    BASE_URL: 'https://wasadmin-stg.nlb.gov.sg:83/web/was-webservice-admin', //writeback the URL to link to end 
-    LOGOUT_URL: 'https://ssoadmin-stg.nlb.gov.sg:83/OAuth2/Account/ExternalLogOff?returnUrl=https://wasadmin-stg.nlb.gov.sg:83/web/was-webservice-admin/api/v1/user/server-logout',
+    BASE_URL: '', //writeback the URL to link to end 
+    LOGOUT_URL: '',
     env: 'staging'
 };
 

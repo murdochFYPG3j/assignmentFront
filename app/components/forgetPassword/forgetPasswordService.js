@@ -1,9 +1,9 @@
-angular.module('was-admin').service("LoginService", function (Restangular) {
+angular.module('was-admin').service("forgetService", function (Restangular) {
 
     var prefix = "/auth/";
 
-    this.login = function (credential) {
-        return Restangular.all(prefix + "login").post(credential);
+    this.submitEmailForForgetPassword = function (email) {
+        return Restangular.all(prefix + "forget-password").post(email);
     };
 
   /*  this.getUserRoles = function () {

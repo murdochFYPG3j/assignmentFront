@@ -25,6 +25,8 @@ angular.module('was-admin').controller('LoginController', function ($scope, $roo
             console.log("this is login "+credential.password+credential.email);
             if(credential.email=='user@gmail.com'&&credential.password=='password'){
                 $rootScope.username='zhangqiang';
+                $rootScope.userEmail='user@gmail.com';
+                console.log("Success");
                //var role=[];
                 /*LoginService.login(credential).then(function (result) {
                 console.info("result", result);
@@ -45,9 +47,11 @@ angular.module('was-admin').controller('LoginController', function ($scope, $roo
             }else{
                 console.log('run');
                 ctrl.credentialDto=[];
-                ctrl.credentialDto.reason ='Wrong password, user name is user, password is password';
+                ctrl.credentialDto.reason ='Wrong password, user name is user@gmail.com, password is password';
             }
         
+        }else{
+            ctrl.credentialDto.reason ='please enter correct user name and password';
         }
     }; 
     ctrl.redirect=function(param){

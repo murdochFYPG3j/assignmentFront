@@ -174,11 +174,11 @@ angular.module('was-admin').controller('registerController', function ($scope, $
         ctrl.checkSecondPassword();
         ctrl.checkFlag();
 
-        if(ctrl.copyrightInvalid==false&& ctrl.secondPasswordInvalid==false&& ctrl.passwordNotEqual==false &&ctrl.firsPasswordInvalid==false&&ctrl.lastNameInvalid==false
+        if(ctrl.secondPasswordInvalid==false&& ctrl.passwordNotEqual==false &&ctrl.firsPasswordInvalid==false&&ctrl.lastNameInvalid==false
            &&ctrl.firstNameInvalid==false&&ctrl.resultEmail===false){
+            ctrl.submitNomination();
+            
            
-           
-            ctrl.validateCaptcha();
 
           
         }else{
@@ -194,6 +194,12 @@ angular.module('was-admin').controller('registerController', function ($scope, $
 
         
     };
+    ctrl.reloadFunc=function(){
+        ctrl.email=null;
+        ctrl.password=null;
+        ctrl.firstName=null;
+        ctrl.lastName=null;
+    }
     ctrl.submitNomination = function () {
 
        
@@ -201,14 +207,17 @@ angular.module('was-admin').controller('registerController', function ($scope, $
            var param = {
                
                email: ctrl.email,
-               password:ctrl.password;
-               role: ctrl.userType,
+               password:ctrl.password,
                first_name: ctrl.firstName,
                last_name: ctrl.lastName
 
-           };
+           }; sweetAlert.swal({
+               customClass: 'swal2-side',
+               type: 'success',
+               text: 'Successful, Please check your email'
+           }).then(function (response) {});
            //console.log('this i sParam data' + JSON.stringify(param, null, 2));
-        var submitNomination = RegisterService.submiteNomination(param);
+        var submitUser = RegisterService.submitUser(param);
 
            /*submitNomination.swal({
             type: 'success',
@@ -219,9 +228,10 @@ angular.module('was-admin').controller('registerController', function ($scope, $
             $scope.msgOfError(response, $scope);
 
         });*/
+       
            
 
-           submitNomination.then(function (data) {
+        /*submitUser.then(function (data) {
                ctrl.loading = false;
                
 
@@ -236,7 +246,7 @@ angular.module('was-admin').controller('registerController', function ($scope, $
                        dangerMode: true,
                    });
                } else {
-                   reloadFunc();
+                   ctrl.reloadFunc();
                    sweetAlert.swal({
                        customClass: 'swal2-side',
                        type: 'success',
@@ -253,45 +263,13 @@ angular.module('was-admin').controller('registerController', function ($scope, $
 
 
            });
-       
+       */
 
   
     };
 
 
-    ctrl.validateCaptcha = function () {
-        
-       // console.log('run validateCaptcha ');
-        var params = {
-            response: grecaptcha.getResponse()
-        };
-
-        //console.log("grecaptcha.getResponse(): "+grecaptcha.getResponse());
-        var captchaFlag = RegisterService.verifyCaptcha(params);
-
-        captchaFlag.then(function(success){
-
-            //console.log("success: "+success);
-            
-            if (success) {
-                
-                ctrl.submitNomination();
-            }
-            else {
-                grecaptcha.reset();
-                
-                sweetAlert.swal({
-                    customClass: 'swal2-side',
-                    text: "Captcha entered is incorrect, please try to validate again",
-                    icon: "warning",
-                    type: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                });
-            }
-            
-        });        
-    };
+  
     
   
         });

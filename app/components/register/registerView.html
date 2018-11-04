@@ -79,38 +79,7 @@
                     </div>            
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label class="text-left">Email </label>
-                        <input class="form-control" type="text" name="userEmail" ng-change="ctrl.checkEmail()" ng-model="ctrl.email" placeholder="Email address of nominator" maxlength="255" autocomplete="off" required>
-                    </div>
-                    <div  role="alert" style="color:red">
-                        <p><span class="error" ng-if="ctrl.emailInvalid" ><i class="fa fa-warning" >&nbsp</i>Invalid email address format</span>
-                            <span class="error" ng-if="ctrl.emailEmpty" ><i class="fa fa-warning" >&nbsp</i>Email address cannot be blank</span>
-                            <span ng-if="ctrl.emailExceed"><a ><i class="fa fa-warning"  >&nbsp</i>Email address cannot exceed 255 character ({{ctrl.email.length}} character)</a></span>
-                        </p>
-                    </div>
-                </div>
-            
-               
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label class="text-left">Choose your user type </label>
-                        <select class="form-control"  name="userCopyright"  ng-change="ctrl.checkFlag()"
-                                ng-model="ctrl.userType" requested>
-                            <option value="" selected disabled>Please Select</option>
-                            <option ng-repeat="type in ctrl.userTypes" value="{{type.code}}">{{type.name}}</option>
-                        </select>
-                    </div>
-                    <div role="alert" style="color:red" >
-                        <p><span class="error" ng-if="ctrl.copyrightInvalid " ><i class="fa fa-warning" >&nbsp</i>Please select a value</span>
-                        </p>
-                    </div>
-                </div>
-               
-            </div>
-            
+           
             <div class="row" style="margin-bottom: 20px">
                 <div class="col-12 col-md-6">
                     <div class="form-group">
@@ -125,7 +94,7 @@
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                         <label class="text-left"> Enter your Password Again </label>
-                        <input class="form-control" type="passowrd" name="lastName" ng-change="ctrl.checkSecondPassword()"  ng-model="ctrl.secondPassword" placeholder="Enter password again" maxlength="255" required>
+                        <input class="form-control" type="password" name="password" ng-change="ctrl.checkSecondPassword()"  ng-model="ctrl.secondPassword" placeholder="Enter password again" maxlength="255" required>
                         <div class="icon-container-remove" style="color:red">
                             <span ng-if="ctrl.secondPasswordInvalid"><a ><i class="fa fa-warning"  >&nbsp</i>password cannot be blank </a></span>
                             <span ng-if="ctrl.passwordNotEqual"><a ><i class="fa fa-warning"  >&nbsp</i>password must be same</a></span>
@@ -133,12 +102,45 @@
                     </div>            
                 </div>
             </div>
+            
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label class="text-left">Email </label>
+                        <input class="form-control" type="text" name="userEmail" ng-change="ctrl.checkEmail()" ng-model="ctrl.email" placeholder="Email address of nominator" maxlength="255" autocomplete="off" required>
+                    </div>
+                    <div  role="alert" style="color:red">
+                        <p><span class="error" ng-if="ctrl.emailInvalid" ><i class="fa fa-warning" >&nbsp</i>Invalid email address format</span>
+                            <span class="error" ng-if="ctrl.emailEmpty" ><i class="fa fa-warning" >&nbsp</i>Email address cannot be blank</span>
+                            <span ng-if="ctrl.emailExceed"><a ><i class="fa fa-warning"  >&nbsp</i>Email address cannot exceed 255 character ({{ctrl.email.length}} character)</a></span>
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- <div class="col-12 col-md-6">
+<div class="form-group">
+<label class="text-left">Choose your user type </label>
+<select class="form-control"  name="userCopyright"  ng-change="ctrl.checkFlag()"
+ng-model="ctrl.userType" requested>
+<option value="" selected disabled>Please Select</option>
+<option ng-repeat="type in ctrl.userTypes" value="{{type.code}}">{{type.name}}</option>
+</select>
+</div>
+<div role="alert" style="color:red" >
+<p><span class="error" ng-if="ctrl.copyrightInvalid " ><i class="fa fa-warning" >&nbsp</i>Please select a value</span>
+</p>
+</div>
+</div>-->
+
+            </div>
+
 
                 
-                <div class="col-12 col-md-12">
+             <!--   <div class="col-12 col-md-12">
                     <div class="g-recaptcha" data-sitekey="6LcJX04UAAAAAMBGKENVfhSdwgyPV2v_8P88hcZt"></div>
                    
-                </div>
+                </div>-->
                
                 
                 <div class="col-12 col-md-12 mt-3 ">
