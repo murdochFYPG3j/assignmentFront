@@ -312,10 +312,11 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
                 });
             }
            
-            if(selectedAppointmentID){
+            if(isSelected){
                 var param={
                     previousAppoinmentID:ctrl.selectedAppointment.id,
                     selectedSlots:selectedAppointmentID,
+                    userEmail:$rootScope.userEmail
 
                 }
                 

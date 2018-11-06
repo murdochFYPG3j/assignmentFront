@@ -1,16 +1,11 @@
-angular.module('was-admin').controller('profileController', function ($scope, $rootScope, $stateParams, $uibModal, ProfileService, PaginationService, $q, Constants, sweetAlert, MomentDateService, $window) {
+angular.module('was-admin').controller('createUserController', function ($scope, $rootScope, $stateParams, $uibModal, createUserService, PaginationService, $q, Constants, sweetAlert, MomentDateService, $window) {
     'use strict';
     var ctrl = this;
     ctrl.filteredList = [];
 
     function initial() {
         
-        ctrl.selectedUserDetails={firstName:'Test',
-                                 lastName:'TestLast',
-                                 userEmail:'email@c.com',
-                                 loginId:'user',
-                                  roleName:'User',
-                                 contactNo:81888888};
+        ctrl.selectedUserDetails=[];
         
         //ctrl.selectedUserDetails=ProfileService.getUserDetail(userID);
    //     console.log("Innital"+JSON.stringify(ctrl.nominations,null,2));
@@ -21,7 +16,7 @@ angular.module('was-admin').controller('profileController', function ($scope, $r
         initial();
     }
     
-    ctrl.updateUser=function(){
+    ctrl.createUser=function(){
         console.log('updaye');
         ctrl.updateEmail();
         if(!ctrl.resultEmail){
@@ -34,9 +29,9 @@ angular.module('was-admin').controller('profileController', function ($scope, $r
             };
             sweetAlert.swal({
                 type: 'success',
-                text: 'Successfully Changed'
+                text: 'Successfully created'
             });
-            //var selectedUserDetailPromise=ProfileService.updateUserDetail(param);
+            //var selectedUserDetailPromise=createUserService.createUser(param);
            /* selectedUserDetailPromise.then(function (data) {
                 ctrl.loading = false;
 

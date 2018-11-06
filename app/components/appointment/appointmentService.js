@@ -34,5 +34,9 @@ angular.module('was-admin').service("AppoinmentService", function ($q, $rootScop
     this.changeAppointment=function(param){
         return Restangular.all(prefix + '/change-appoinment').post(param);
     }
+    
+    this.createAppointment=function(param){
+        return Restangular.all(prefix + '/create-appoinments').post(param);
+    }
  
 });

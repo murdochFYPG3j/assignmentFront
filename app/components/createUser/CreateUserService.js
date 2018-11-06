@@ -1,4 +1,4 @@
-angular.module('was-admin').service("ProfileService", function ($q, $rootScope, Restangular) {
+angular.module('was-admin').service("createUserService", function ($q, $rootScope, Restangular) {
     var prefix = "";
 
 

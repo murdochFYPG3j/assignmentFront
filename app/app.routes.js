@@ -162,7 +162,7 @@ var routes = [
                     files: [                        
                         'app/components/profile/profileController.js',
                         
-                        'app/components/profile/modal/profileService',
+                        'app/components/profile/profileService',
                         'app/shared/common-services/MomentDateService.js'
                     ]
                 });
@@ -249,6 +249,26 @@ var routes = [
             }
         }
     },{
+        name: 'userManagement.create',
+        url: '/create',
+        templateUrl: 'app/components/createUser/createUserView.html',
+        controller: 'createUserController',
+        controllerAs:'ctrl',
+        resolve: {
+            loadMyDirectives: function ($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name: 'was-admin',
+                    files: [                        
+                        'app/components/createUser/createUserController.js',
+
+                        'app/components/createUser/createUserService.js',
+                        'app/shared/common-services/MomentDateService.js'
+                    ]
+                });
+            }
+        }
+    },
+    {
         name: 'register',
         url: '/register',
         templateUrl: 'app/components/register/registerView.html',

@@ -1,6 +1,6 @@
 <style>
     .myOwnBg {
-        background-color: #959595;
+        background-color:  #4dbd74 !important;
     }
 </style>
 <div class="card">
@@ -12,16 +12,16 @@
     </div>
     <div class="card-body">
         
-        <div class="table table-striped" st-table="appointmentsVar" st-safe-src="ctrl.appointmentMonths">
-            <table class="table table-responsive table-striped">
+        <div class="table " st-table="appointmentsVar" st-safe-src="ctrl.appointmentMonths">
+            <table class="table table-responsive ">
                 <thead>
                     <tr>
                         <th style="min-width: 100px; max-width: 100px;">
                             <div style="padding-bottom:5px">
                               Month</div>
                             <select  ng-model="ctrl.selectedMonth" ng-change="ctrl.changeMonth()">
-                            <option>Nov</option>
-                            <option>Dec</option>
+                            <option value='11'>Nov</option>
+                            <option value='12'>Dec</option>
                             </select>
                           </th>
                         <th style="min-width: 100px; max-width: 100px;">
@@ -59,81 +59,83 @@
                     <tr ng-repeat=" week in appointmentsVar">
                         <td style="min-width: 100px; max-width: 100px;"></td>
                         <td ng-disbled="week.Monday.status=='full'">
-                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Monday.status=='full'}">
-                                <div>
+                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Monday.status=='available'}">
+                                <div ng-class="{'myOwnBg':week.Monday.status=='available'}">
+                                    <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to create appointment" tooltip-placement="left" ng-if="week.Monday.status!=='full'" ng-click="ctrl.displayDay(week.Monday)"> <h1 >{{week.Tuesday.day}}</h1> </a>
+                                </div>
+                                <div ng-if="week.Monday.status==='full'">
                                     <h1>{{week.Monday.day}}</h1></div>
                             </div>
+                            <!--<div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Monday.status=='available'}">
+                                <div>
+                                    <h1>{{week.Monday.day}}</h1></div>
+                            </div>-->
                         </td>
                         <td>
-                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Tuesday.status=='full'}">
-                                <div>
+                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Tuesday.status=='available'}">
+                                <div ng-class="{'myOwnBg':week.Tuesday.status=='available'}">
+                                    <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to create appointment" tooltip-placement="left" ng-if="week.Tuesday.status!=='full'" ng-click="ctrl.displayDay(week.Tuesday)"> <h1 >{{week.Tuesday.day}}</h1> </a>
+                                </div>
+                                <div ng-if="week.Tuesday.status==='full'">
                                     <h1>{{week.Tuesday.day}}</h1></div>
                             </div>
+                            <!--<div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Tuesday.status=='available'}">
+                                <div>
+                                    <h1>{{week.Tuesday.day}}</h1></div>
+                            </div>-->
                         </td>
                         <td>
-                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Wednesday.status=='full'}">
-                                <div>
+                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Wednesday.status=='available'}">
+                                <div ng-class="{'myOwnBg':week.Wednesday.status=='available'}">
+                                    <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to create appointment" tooltip-placement="left" ng-if="week.Wednesday.status!=='full'" ng-click="ctrl.displayDay(week.Wednesday)"> <h1 >{{week.Thuesday.day}}</h1> </a>
+                                </div>
+                                <div ng-if="week.Wednesday.status==='full'">
                                     <h1>{{week.Wednesday.day}}</h1></div>
                             </div>
+                            <!--<div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Wednesday.status=='available'}">
+                                <div>
+                                    <h1>{{week.Wednesday.day}}</h1></div>
+                            </div>-->
                         </td>
                         <td>
-                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Thuesday.status=='full'}">
-                                <div>
+                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Thuesday.status=='available'}">
+                                <div ng-class="{'myOwnBg':week.Thuesday.status=='available'}">
+                                    <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to create appointment" tooltip-placement="left" ng-if="week.Thuesday.status!=='full'" ng-click="ctrl.displayDay(week.Thuesday)"> <h1 >{{week.Thuesday.day}}</h1> </a>
+                                </div>
+                                <div ng-if="week.Thuesday.status==='full'">
                                     <h1>{{week.Thuesday.day}}</h1></div>
                             </div>
+                            <!--<div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Thuesday.status=='available'}">
+                                <div>
+                                    <h1>{{week.Thuesday.day}}</h1></div>
+                            </div>-->
                         </td>
                         <td>
-                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Friday.status=='full'}">
-                                <div>
+                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Friday.status=='available'}">
+                                <div ng-class="{'myOwnBg':week.Friday.status=='available'}">
+                                    <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to create appointment" tooltip-placement="left" ng-if="week.Friday.status!=='full'" ng-click="ctrl.displayDay(week.Friday)"> <h1 >{{week.Friday.day}}</h1> </a>
+                                </div>
+                                <div ng-if="week.Friday.status==='full'">
                                     <h1>{{week.Friday.day}}</h1></div>
                             </div>
-                        </td>
-                        <td ng-click="ctrl.displayDay()">
-                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Saturday.status=='full'}">
+                            <!--<div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Friday.status=='available'}">
                                 <div>
-                                    <button class="btn btn-sm btn-default"  data-toggle="modal" data-target="#{{week.Saturday.day}}" uib-tooltip="Click to create appointment" tooltip-placement="left" ng-if="week.Saturday.status!=='full'"> <h1>{{week.Saturday.day}}</h1> </button>
+                                    <h1>{{week.Friday.day}}</h1></div>
+                            </div>-->
+                        </td>
+                        <td  >
+                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Saturday.status=='available'}">
+                                <div ng-class="{'myOwnBg':week.Saturday.status=='available'}">
+                                    <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to create appointment" tooltip-placement="left" ng-if="week.Saturday.status!=='full'" ng-click="ctrl.displayDay(week.Saturday)"> <h1 >{{week.Saturday.day}}</h1> </a>
                                     </div>
                                 <div ng-if="week.Saturday.status==='full'">
                                     <h1>{{week.Saturday.day}}</h1></div>
                             </div>
                             
-                            <div class="modal fade" id="{{week.Saturday.day}}" tabindex="-1" role="dialog" aria-labelledby="Participants" aria-hidden="true">
-
-                                <div class="modal-dialog" style="width:400px">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                           <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
-                                            <h4 class="modal-title" id="myModalLabel">All available slot </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            
-                                            
-                                            <table class="table table-bordered table-striped table-responsive table-condensed small" style="width:100%" >
-                                                <tbody>
-                                                    <tr ng-repeat="slot in week.Saturday.slots">
-                                                       
-                                                        <td><input type="checkbox" ng-model="slot.isSelected"
-                                                                   ng-true-value="'YES'" ng-false-value="'NO'">{{slot.startTime}} - {{slot.endTime}}</td>
-                                                       
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn  btn-primary" ng-click="ctrl.saveAppintment(ctrl.reason,slots)">
-                                                save
-                                            </button>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <!--<button type="button" class="btn btn-primary"  data-dismiss="modal" ng-click="checkStageName(competition.stageList,competition.tempStageList)">Save</button>-->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </td>
                         <td>
-                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Sunday.status=='full'}">
+                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Sunday.status=='available'}">
                                 <div>
                                     <h1>{{week.Sunday.day}}</h1></div>
                             </div>
@@ -141,6 +143,40 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="modal fade" id="appointmentList" tabindex="-1" role="dialog" aria-labelledby="Participants" aria-hidden="true">
+
+                <div class="modal-dialog" style="width:400px">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+                            <h4 class="modal-title" id="myModalLabel">All available slot </h4>
+                        </div>
+                        <div class="modal-body">
+
+
+                            <table class="table table-bordered table-striped table-responsive table-condensed small" style="width:100%" >
+                                <tbody>
+                                    <tr ng-repeat="slot in ctrl.slots">
+
+                                        <td><input type="checkbox" ng-model="slot.isSelected"
+                                                   ng-true-value="'YES'" ng-false-value="'NO'">{{slot.startTime}} - {{slot.endTime}}</td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn  btn-primary" data-dismiss="modal" ng-click="ctrl.saveAppintment()">
+                                save
+                            </button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <!--<button type="button" class="btn btn-primary"  data-dismiss="modal" ng-click="checkStageName(competition.stageList,competition.tempStageList)">Save</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="card-footer"> Legends </div>
     </div>

@@ -1,7 +1,81 @@
 angular.module('was-admin').controller('appointmentCreateController', function ($scope, $rootScope, $stateParams, AppoinmentService, $state, FileUploader, sweetAlert, Constants,$window, PaginationService, $q) {
     'use strict';
     var ctrl = this;
-   
+    ctrl.changeMonth=function(){
+        console.log('change month'+ctrl.selectedMonth)
+        var param={month:11}
+        /* var appoinmentPromise=AppoinmentService.getAllSlotFromMonth(month);
+
+        $q.all([appoinmentPromise]).then(function (data) {
+
+            ctrl.appointmentMonths = data;
+
+
+
+        });*/
+    }
+    ctrl.displayDay=function(day){
+        ctrl.slots=day.slots;
+    }
+    ctrl.saveAppintment=function(){
+        console.log("run change");
+        var selectedAppointmentID=[];
+        var isSelected=false;
+        if( ctrl.slots.length>1){
+            angular.forEach(ctrl.slots,function(data){
+                if(data.isSelected==='YES'){
+                    isSelected=true;
+                    console.log('check data'+data.id);
+                    selectedAppointmentID.push({
+                        id:data.id
+                    });
+                }
+            });
+        }
+
+        if(isSelected){
+            var param={
+                
+                selectedSlots:selectedAppointmentID,
+                userEmail:$rootScope.userEmail
+
+            }
+
+            /* var changeResult=AppoinmentService.createAppointment(param);
+        changeResult.then(function (data) {
+            ctrl.loading = false;
+
+            if (data.status == 'OK') {
+                sweetAlert.swal({
+                    type: 'success',
+                    text: 'Successfully Changed'
+                });
+
+            } else if (data.status == 'NO') {
+                sweetAlert.swal({
+                    text: data.result,
+                    icon: "warning",
+                    type: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                });
+            }
+        }, function (response) {});
+  */
+            sweetAlert.swal({
+                type: 'success',
+                text: 'Successfully save'
+            });
+        }else{
+            sweetAlert.swal({
+                text: 'No Slot selected',
+                icon: "warning",
+                type: "warning",
+                buttons: true,
+                dangerMode: true,
+            });
+        }
+    }
     ctrl.initial = function () {
         var day=new Date();
         var month=day.getMonth();
