@@ -22,6 +22,17 @@ angular.module('was-admin').service("AppoinmentService", function ($q, $rootScop
     this.downloadCsv = function (month){
         return Restangular.all(prefix + '/download-all-appointment-list').post(month);
     };
+    
+    this.getAllAppointmentListByDay=function (param){
+        return Restangular.all(prefix + '/get-all-available-slot-for-day').post(param);
+    };
    
+    this.cancelAppointment=function(id){
+        return Restangular.all(prefix + '/cancel-appoinment').post(id);
+    }
+    
+    this.changeAppointment=function(param){
+        return Restangular.all(prefix + '/change-appoinment').post(param);
+    }
  
 });

@@ -13,6 +13,7 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
             startIndex: 0,
             pageSize: Constants.PAGE_SIZE
         };
+        ctrl.change=false;
         ctrl.allStatuses=[{name:'Pending',
                           code:'PENDING'},
                           {name:'Approved',
@@ -140,16 +141,14 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
         }
     };
     ctrl.downloadCsv = function () {
-        return SpecialCollectionService.downloadCsv(ctrl.mergedSearchDTO);
+        return AppoinmentService.downloadCsv(ctrl.mergedSearchDTO);
     };
     
 
     
     ctrl.showDetailPage = function (app) {
-        //show as page
-       // $state.go('appointment.detail', {'webID' : app.id });
-        //show as modal
-        console.log('run1');
+       
+       /* console.log('run1');
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
@@ -175,7 +174,7 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
             ctrl.initial();
             ctrl.paginate(ctrl.tableState);
             console.log('Modal dismissed at: ' + new Date());
-        });
+        });*/
     };
     ctrl.saveConfirm = function () {
        
@@ -232,6 +231,133 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
             });
             }
     };
+    
+    ctrl.changeAppointment=function(){
+        ctrl.change=true;
+        var param={
+            startTime:ctrl.selectedAppointment.startTime,
+            endTime:ctrl.selectedAppointment.endTime
+        }
+        //ctrl.appointmentList=AppoinmentService.getAllAppointmentListByDay(param);
+        ctrl.appointmentList=[{
+            id:'1',
+            startTime:"12:00:00",
+            endTime:"13:00:00",
+            location:'room 1'
+        },{ id:'11',
+            startTime:"13:00:00",
+            endTime:"14:00:00",
+            location:'room 1'
+        }
+                             ]
+    }
+    
+    ctrl.showDetailPage=function(param){
+        ctrl.selectedAppointment={
+            id:param.id,
+            startTime:param.startTime,
+            endTime:param.endTime,
+            status:param.statusName,
+            location:'room 1'
+        };
+    };
+    ctrl.closeModal=function(){
+        console.log("close");
+        ctrl.selectedAppointment=null;
+        ctrl.change=false;
+    };
+    ctrl.closeSlot=function(){
+        ctrl.change=false;
+    };
+    ctrl.cancelAppintment=function(){
+        sweetAlert.swal({
+            type: 'success',
+            text: 'Successfully Deleted'
+        });
+        /* var cancelResult=AppoinmentService.cancelAppointment(ctrl.selectedAppointment.id);
+        cancelResult.then(function (data) {
+            ctrl.loading = false;
+
+            if (data.status == 'OK') {
+                sweetAlert.swal({
+                    type: 'success',
+                    text: 'Successfully Deleted'
+                });
+
+            } else if (data.status == 'NO') {
+                sweetAlert.swal({
+                    text: data.result,
+                    icon: "warning",
+                    type: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                });
+            }
+        }, function (response) {});
+  */
+    };
+        ctrl.saveAppintment=function(){
+            console.log("run change");
+            var selectedAppointmentID=[];
+            var isSelected=false;
+            if( ctrl.appointmentList.length>1){
+                angular.forEach(ctrl.appointmentList,function(data){
+                    if(data.isSelected==='YES'){
+                        isSelected=true;
+                        console.log('check data'+data.id);
+                        selectedAppointmentID.push({
+                            id:data.id
+                        });
+                    }
+                });
+            }
+           
+            if(selectedAppointmentID){
+                var param={
+                    previousAppoinmentID:ctrl.selectedAppointment.id,
+                    selectedSlots:selectedAppointmentID,
+
+                }
+                
+                /* var changeResult=AppoinmentService.changeAppointment(param);
+        changeResult.then(function (data) {
+            ctrl.loading = false;
+
+            if (data.status == 'OK') {
+                sweetAlert.swal({
+                    type: 'success',
+                    text: 'Successfully Changed'
+                });
+
+            } else if (data.status == 'NO') {
+                sweetAlert.swal({
+                    text: data.result,
+                    icon: "warning",
+                    type: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                });
+            }
+        }, function (response) {});
+  */
+                sweetAlert.swal({
+                    type: 'success',
+                    text: 'Successfully Changed'
+                });
+            }else{
+                sweetAlert.swal({
+                    text: 'No Slot selected',
+                    icon: "warning",
+                    type: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                });
+            }
+           
+            
+        };
+       
+    
 }).config(function ($provide)
           {
     $provide.decorator('mFormatFilter', function ()

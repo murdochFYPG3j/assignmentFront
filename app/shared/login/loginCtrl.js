@@ -43,7 +43,7 @@ angular.module('was-admin').controller('LoginController', function ($scope, $roo
             });*/
                 $rootScope.selectedRoleCode='user';
                 if($rootScope.selectedRoleCode==='user'){
-                    $state.go('appointment.list');list
+                    $state.go('appointment.list');
                 }else{
                     $state.go('landing.view');
                 }

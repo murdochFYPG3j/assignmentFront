@@ -75,7 +75,8 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat=" appointment in appointmentsVar">
-                            <td class="text-center" style="text-align: center"><a href="" ng-click="ctrl.showDetailPage(appointment)">{{appointment.id}}</a></td>
+                            <td class="text-center" style="text-align: center">
+                                <a href="" ng-click="ctrl.showDetailPage(appointment)"data-toggle="modal" data-target="#appointmentDetail" uib-tooltip="Click to view appointment" tooltip-placement="left" >{{appointment.id}}</a></td>
                             <td class="text-center"> 
                                 <span class="badge badge-danger" ng-model="appointment.statusCode" ng-if="appointment.statusName=='Rejected'">{{appointment.statusName}}</span> 
                                 <span class="badge badge-success" ng-model="appointment.statusCode" ng-if="appointment.statusName=='Approved'">{{appointment.statusName}}</span>
@@ -95,6 +96,66 @@
                     <div st-template="app/shared/pagination/paginationView.html" st-pagination st-items-by-page="ctrl.searchDTO.pageSize" 
                          st-page-change="pageOffset=(newPage-1)*searchDTO.pageSize"></div>
                 </div>
+                <div class="modal fade" id="appointmentDetail" tabindex="-1" role="dialog" aria-labelledby="Participants" aria-hidden="true">
+
+                    <div class="modal-dialog" style="width:400px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+                                <h4 class="modal-title" id="myModalLabel">All available slot </h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row"style="margin-bottom: 10px;padding-left: 10px">
+                                    <label class="col-3">Status:</label>
+                                    <input name="startTime" ng-model="ctrl.selectedAppointment.status" disabled></div>
+                                <div class="row" style="margin-bottom: 10px;padding-left: 10px">
+                                    <label class="col-3">Start time:</label>
+                                     <input name="startTime" ng-model="ctrl.selectedAppointment.startTime" disabled></div>
+                                <div class="row"style="margin-bottom: 10px;padding-left: 10px">
+                                    <label class="col-3">End time:</label>
+                                    <input name="endTime" ng-model="ctrl.selectedAppointment.endTime" disabled></div>
+                                <div class="row" style="margin-bottom: 10px;padding-left: 10px">
+                                    <label class="col-3">Location:</label>
+                                    <input name="location" ng-model="ctrl.selectedAppointment.location" disabled></div>
+                                <button ng-click="ctrl.changeAppointment()" style="margin-bottom: 10px" ng-if="!ctrl.change">Change to Another Slot</button>
+                                <button ng-click="ctrl.closeSlot()" style="margin-bottom: 10px" ng-if="ctrl.change">Close ALl Slots</button>
+                                <table class="table table-bordered table-striped table-responsive table-condensed small" style="width:100%;" ng-if="ctrl.change" >
+                                    <thead>
+                                        <tr>
+                                        <th>Time</th>
+                                        <th>Location</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="slot in ctrl.appointmentList">
+
+                                            <td><input type="checkbox" ng-model="slot.isSelected"
+                                                       ng-true-value="'YES'" ng-false-value="'NO'">{{slot.startTime}} - {{slot.endTime}}</td>
+                                            <td>{{slot.location}}</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn  btn-primary" ng-click="ctrl.saveAppintment()"
+                                        ng-if="ctrl.change"
+                                        data-dismiss="modal">
+                                    save
+                                </button>
+                                <button class="btn  btn-primary" data-dismiss="modal" ng-click="ctrl.cancelAppintment()"
+                                        >
+                                    Cancel Appointment
+                                </button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="ctrl.closeModal()">Close</button>
+                                <!--<button type="button" class="btn btn-primary"  data-dismiss="modal" ng-click="checkStageName(competition.stageList,competition.tempStageList)">Save</button>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             
             </div>
             <div class="card-footer"> Legends
