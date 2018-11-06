@@ -19,13 +19,14 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
                           code:'APROVED'},
                           {name:'Rejected',
                           code:'REJECTED'}]
-       /* var SpecialCollectionTypePromise = SpecialCollectionService.getAllSpecialCollectionType();
-        var SpecialCollectionStatusPromise = SpecialCollectionService.getAllSpecialCollectionStatus();
+        /* var allStutasPromise = AppoinmentService.getAllappointmentStatus();
+        
         $q.all([SpecialCollectionTypePromise, SpecialCollectionStatusPromise]).then(function (data) {
             ctrl.allTypes = data[0];
             ctrl.allStatuses = data[1];
             
         });*/
+        
         ctrl.appointments=[{id:1,
                             statusName:'Pending',
                             statusCode:'PENDING',
@@ -41,7 +42,7 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
                             statusCode:'REJECTED',
                             startTime:new Date(),
                             endTime:new Date()}];
-        /* var resultPromise = SpecialCollectionService.getAllSpecialCollection(ctrl.mergedSearchDTO);
+        /* var resultPromise = AppoinmentService.getAllappointmentList($rootScope.userEmail);
             $q.all([resultPromise]).then(function (data) {
                 PaginationService.setPaginationResult(ctrl, tableState, data);
                 ctrl.websites = ctrl.records;
@@ -127,7 +128,7 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
                                 statusCode:'REJECTED',
                                 startTime:new Date(),
                                 endTime:new Date()}];
-           /* var resultPromise = SpecialCollectionService.getAllSpecialCollection(ctrl.mergedSearchDTO);
+            /* var resultPromise = AppoinmentService.getAllAppointmentListBySearch(ctrl.mergedSearchDTO);
             $q.all([resultPromise]).then(function (data) {
                 PaginationService.setPaginationResult(ctrl, tableState, data);
                 ctrl.websites = ctrl.records;
