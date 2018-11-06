@@ -1,4 +1,4 @@
-angular.module('was-admin').controller('appointmentManageController', function ($scope, $rootScope, $stateParams, $uibModal, Constants, $q, PaginationService, sweetAlert,$state) {
+angular.module('was-admin').controller('appointmentManageController', function ($scope, $rootScope, $stateParams, $uibModal, Constants, $q, PaginationService, sweetAlert,$state,AppointmentManagementService) {
     'use strict';
     var ctrl = this;
 
@@ -151,6 +151,10 @@ angular.module('was-admin').controller('appointmentManageController', function (
         ctrl.searchEndDate=null;
     };
     
+    ctrl.displayDay=function(day){
+        ctrl.selectedDay=day;
+    }
+    
     ctrl.createAppoinment=function(slots){
         if(slots){
             slots.push({
@@ -170,26 +174,7 @@ angular.module('was-admin').controller('appointmentManageController', function (
         ctrl.endTime=null;
     }
     
-    $scope.changeMaxDate=function(model, newDate){
-        ctrl.searchEndDate=newDate;
 
-        $scope.$broadcast('pickerUpdate', 'pickerToUpdateMaxDate1', {
-            maxDate: ctrl.searchEndDate, //A moment object, date object, or date/time string parsable by momentjs
-        });
-     
-        forceLossFocus();
-        ctrl.paginate(ctrl.tableState);
-      
-    };
-    $scope.changeMinDate=function(model, newDate){
-        
-        ctrl.searchStartDate=newDate;
-        $scope.$broadcast('pickerUpdate', 'pickerToUpdateMinDate1', {
-            minDate: ctrl.searchStartDate, //A moment object, date object, or date/time string parsable by momentjs
-        });
-        forceLossFocus();
-        ctrl.paginate(ctrl.tableState);
-    };
 
     
     
@@ -220,103 +205,5 @@ angular.module('was-admin').controller('appointmentManageController', function (
     
 
     
-    ctrl.showDetailPage = function (app) {
-        //show as page
-       // $state.go('appointment.detail', {'webID' : app.id });
-        //show as modal
-        console.log('run1');
-        var modalInstance = $uibModal.open({
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'app/components/appointment/appointmentDetailView.html',
-            controller: 'AppointmentDetailController',
-            controllerAs: 'ctrl',
-            size: 'lg',
-            resolve: {
-                appointments: function () {
-                    return ctrl.appointments;
-                },
-                app: function () {
-                    return app;
-                }
-            }
-        });
-        console.log('run2');
-        modalInstance.result.then(function () {
-            //ctrl.selected = selectedItem;
-            console.log('run333');
-        }, function () {
-            console.log("run reload");
-            ctrl.initial();
-            ctrl.paginate(ctrl.tableState);
-            console.log('Modal dismissed at: ' + new Date());
-        });
-    };
-    ctrl.saveConfirm = function () {
-       
-        if (ctrl.maxCount!=4) {
-            sweetAlert.swal({
-                text: "There must be a total of 4 featured collection ",
-                type: 'warning',
-                icon: 'warning',
-                confirmButtonText: "Ok",
-            });
-        }
-        else {
-            var updateinputValue = sweetAlert.swal({
-                text: "Do you want to continue ?",
-                showCancelButton: true,
-                confirmButtonText: "Continue",
-            }).then(function (response) {
-                if (response.value == true) {
-                    var param = [];
-                    angular.forEach(ctrl.specialCollectionList, function (data) {
-                        param.push({
-                            id: data,
-                            featureFlagCode:Constants.FEATURE_FLAG_YES,
-                            
-                        });
-                    });
 
-                    
-                    var result = SpecialCollectionService.saveSpecialCollection(param);
-                    result.then(function (data) {
-                        ctrl.loading = false;
-                      
-                        if (data.successFlag == 'YES') {
-                            sweetAlert.swal({
-                                type: 'success',
-                                text: data.result
-                            });
-                            PaginationService.resetPagination(ctrl,0,Constants.PAGE_SIZE);
-                            ctrl.initial();
-                            ctrl.maxCount = 0;
-                            
-                            ctrl.paginate(ctrl.tableState);
-                        } else if (data.successFlag == 'NO') {
-                            sweetAlert.swal({
-                                text: data.result,
-                                icon: "warning",
-                                type: "warning",
-                                buttons: true,
-                                dangerMode: true,
-                            });
-                        }
-                    }, function (response) {});
-                } else {}
-            });
-            }
-    };
-}).config(function ($provide)
-          {
-    $provide.decorator('mFormatFilter', function ()
-                       {
-        return function newFilter(m, format, tz)
-        {
-            if (!(moment.isMoment(m))) {
-                return '';
-            }
-            return tz ? moment.tz(m, tz).format(format) : m.format(format);
-        };
-    });
 });

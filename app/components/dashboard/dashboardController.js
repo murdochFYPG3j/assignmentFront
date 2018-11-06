@@ -4,7 +4,7 @@ angular.module('was-admin').controller('DashboardController', function ($scope, 
     var initial = function(){
         ctrl.nominationNumber=3;
         //console.log('check');
-        /*DashboardService.getAllNominations().then(function(data){
+        /*DashboardService.getAllPendingAppointments().then(function(data){
             ctrl.result=data;
             
             ctrl.nominationNumber=ctrl.result.totalNumber;

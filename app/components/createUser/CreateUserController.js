@@ -19,7 +19,10 @@ angular.module('was-admin').controller('createUserController', function ($scope,
     ctrl.createUser=function(){
         console.log('updaye');
         ctrl.updateEmail();
-        if(!ctrl.resultEmail){
+        if(!ctrl.resultEmail&&ctrl.selectedUserDetails.firstName.length>0
+           &&ctrl.selectedUserDetails.lastName.length>0
+           &&ctrl.selectedUserDetails.contactNo.length>0
+           &&ctrl.selectedUserDetails.roleName.length>0){
            var param={
                 firstName:ctrl.selectedUserDetails.firstName,
                 lastName:ctrl.selectedUserDetails.lastName,

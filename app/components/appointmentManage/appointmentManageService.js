@@ -13,6 +13,9 @@ angular.module('was-admin').service("AppointmentManagementService", function ($q
         return Restangular.one(prefix + '/get-special-collection'+'/'+id).get();
     };
     
+    this.getAllappointmentList = function(month){
+        return Restangular.one(prefix + '/get-all-appointmentList'+'/'+id).get();
+    };
     
 
 });

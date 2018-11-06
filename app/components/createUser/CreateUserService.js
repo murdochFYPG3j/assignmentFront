@@ -8,8 +8,8 @@ angular.module('was-admin').service("createUserService", function ($q, $rootScop
         return Restangular.all(prefix + '/get-user-detail-by-id').post(param);
     };
     
-    this.updateUserDetail=function(param){
-        return Restangular.all(prefix + '/update-user-detail').post(param);
+    this.createUser=function(param){
+        return Restangular.all(prefix + '/create-user').post(param);
     }
     
 
