@@ -134,6 +134,80 @@ angular.module('was-admin').controller('appointmentManageController', function (
             //ctrl.clearSearchKey();
         };
         ctrl.initial();
+        
+        $scope.uploadTemplate = function() {
+
+            var modalInstance = $uibModal.open({
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'app/shared/upload/appointment_upload_excel_modal.html',
+                controller: function ($scope, $uibModalInstance, $rootScope) {
+
+                    $scope.dismiss = function () {
+                        $uibModalInstance.close();
+                    }
+
+                    $scope.importResult = function () {
+                        console.log('11attachment:' + JSON.stringify($scope.attachment, null, 2));
+                        $scope.ERegSetupResultImportDTO = '';
+
+                        if ($scope.attachment.file[0]===undefined) {
+                            $rootScope.errorHandler($scope, 'messageBannerImportModal', 'Please upload excel file');
+                        }
+                        else if ($scope.attachment.file[0].size > Constants.MAX_FILE_SIZE_ALLOWED) {
+                            $rootScope.errorHandler($scope, 'messageBannerImportModal', 'Please ensure excel file is not bigger than 5MB');
+                        }
+                        else {
+
+                            console.log('attachment:' + JSON.stringify($scope.attachment, null, 2));
+
+                            $scope.ERegSetupResultImportDTO = {
+                                sportYearId:$stateParams.sportYearId,
+                                zoneCode: $stateParams.zone, 
+                                filterType: "DIVISION",
+                                file: $scope.attachment.file,
+                            };
+
+                            $scope.isUploading = true;
+
+                            AppointmentManagementService.getSetupImport($scope.ERegSetupResultImportDTO).then(function (data) {
+                                $scope.validationResult = data;
+                                console.log('validationResult:' + JSON.stringify($scope.validationResult, null, 2));
+
+                                $scope.isUploading = false;
+                                $uibModalInstance.close();
+
+                                if($scope.validationResult.errorCode!==null) {
+
+                                    $rootScope.errorHandler($scope.$parent, 'messageBannerResult', $scope.validationResult.errorCode);
+                                }
+                                else {
+                                    $rootScope.successHandler($scope.$parent, 'messageBannerResult');
+                                    $scope.refreshSetup($scope);
+                                    $scope.getSetup();
+
+                                }
+                            }).finally(function () {
+                                // Hide Spinner
+                                $scope.isUploading = false;
+                                $rootScope.errorHandler($scope, 'messageBannerImportModal', 'Incorrect Excel format uploaded, error has occurred during upload. Please download template to get the correct format');
+
+                            });
+                        }
+                    }               
+                },
+                scope: $scope,
+                size: 'md',
+                resolve: {
+
+                }
+            }); 
+            modalInstance.result.then(function (newNominee) {
+                // Do nothing.
+            }, function (newNominee) {
+                // Do nothing. This is just to prevent the "Possibly unhandled rejection: backdrop click" msg from being printed into the console.
+            });
+        };
 
        
     };

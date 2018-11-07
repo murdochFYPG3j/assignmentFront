@@ -7,7 +7,8 @@
     <div class="card-header"> <span class="fa fa-plus"></span> Create New Appointment
         <div class="pull-right">
             <button class="btn btn-outline-primary" type="button"  ui-sref="appointment.list"><span class="fa fa-backward"></span> Back to Listing </button>
-            <button class="btn btn-outline-danger" type="button" ng-disabled="ctrl.titleInvalid||ctrl.descriptionInvalid||ctrl.uploadImageInvalid" ng-click="ctrl.createSpecialCollection()"><span class="fa fa-save"></span> Save Appointment</button>
+            <button class="btn btn-outline-danger" type="button"  ng-click="uploadTemplate()"><span class="fa fa-upload"></span> Upload Results</button>
+           <!-- <label class="btn btn-sm btn-default navbar-btn btn-file" ng-if="!readAccessCheck()" ng-disabled="setupResultEventListDtos.length===0" ng-click="uploadTemplate()" ><span class="fa fa-upload" /> Upload Results</label>-->
         </div>
     </div>
     <div class="card-body">

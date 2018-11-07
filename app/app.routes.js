@@ -208,10 +208,12 @@ var routes = [
             loadMyDirectives: function ($ocLazyLoad) {
                 return $ocLazyLoad.load({
                     name: 'was-admin',
-                    files: [             
+                    files: [  
+                        
                         'app/components/appointmentManage/appointmentManageController.js',
                         'app/components/appointmentManage/appointmentManageService.js',
-                        'app/shared/upload/uploadController.js'
+                        'app/shared/common-features/SmartTableDirective.js'
+                        
                     ]
                 });
             }
@@ -251,7 +253,7 @@ var routes = [
     },{
         name: 'userManagement.create',
         url: '/create',
-        templateUrl: 'app/components/createUser/createUserView.html',
+        templateUrl: 'app/components/user-management/createUser/CreateUserView.html',
         controller: 'createUserController',
         controllerAs:'ctrl',
         resolve: {
@@ -259,9 +261,9 @@ var routes = [
                 return $ocLazyLoad.load({
                     name: 'was-admin',
                     files: [                        
-                        'app/components/createUser/createUserController.js',
+                        'app/components/user-management/createUser/CreateUserController.js',
 
-                        'app/components/createUser/createUserService.js',
+                        'app/components/user-management/createUser/CreateUserService.js',
                         'app/shared/common-services/MomentDateService.js'
                     ]
                 });
