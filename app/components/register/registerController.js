@@ -209,29 +209,20 @@ angular.module('was-admin').controller('registerController', function ($scope, $
                email: ctrl.email,
                password:ctrl.password,
                first_name: ctrl.firstName,
-               last_name: ctrl.lastName
+               last_name: ctrl.lastName,
+               role:'attendee'
 
-           }; sweetAlert.swal({
+           }; /*sweetAlert.swal({
                customClass: 'swal2-side',
                type: 'success',
                text: 'Successful, Please check your email'
-           }).then(function (response) {});
+           }).then(function (response) {});*/
            //console.log('this i sParam data' + JSON.stringify(param, null, 2));
         var submitUser = RegisterService.submitUser(param);
 
-           /*submitNomination.swal({
-            type: 'success',
-            text: 'Thanks for submitting nomination form to NLB'
-        }).then(function (response) {  
-            ctrl.loading = false;
-            ctrl.processAdditionalRole = false;
-            $scope.msgOfError(response, $scope);
-
-        });*/
-       
            
 
-        /*submitUser.then(function (data) {
+        submitUser.then(function (data) {
                ctrl.loading = false;
                
 
@@ -252,6 +243,8 @@ angular.module('was-admin').controller('registerController', function ($scope, $
                        type: 'success',
                        text: 'success'
                    }).then(function (response) {});
+                   
+                   $state.go('login');
                }
 
 
@@ -263,7 +256,7 @@ angular.module('was-admin').controller('registerController', function ($scope, $
 
 
            });
-       */
+       
 
   
     };

@@ -61,7 +61,7 @@ var environments = {
 
 
 var staging = {
-    BASE_URL: '', //writeback the URL to link to end 
+    BASE_URL: 'http://api.fyp.darren.li', //writeback the URL to link to end 
     LOGOUT_URL: '',
     env: 'staging'
 };

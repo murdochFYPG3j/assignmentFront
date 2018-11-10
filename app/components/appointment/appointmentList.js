@@ -28,7 +28,7 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
             
         });*/
         
-        ctrl.appointments=[{id:1,
+       /* ctrl.appointments=[{id:1,
                             statusName:'Pending',
                             statusCode:'PENDING',
                             startTime:new Date(),
@@ -42,15 +42,15 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
                             statusName:'Rejected',
                             statusCode:'REJECTED',
                             startTime:new Date(),
-                            endTime:new Date()}];
-        /* var resultPromise = AppoinmentService.getAllappointmentList($rootScope.userEmail);
+                            endTime:new Date()}];*/
+         var resultPromise = AppoinmentService.getAllappointmentList();
             $q.all([resultPromise]).then(function (data) {
-                PaginationService.setPaginationResult(ctrl, tableState, data);
-                ctrl.websites = ctrl.records;
+               // PaginationService.setPaginationResult(ctrl, tableState, data);
+                ctrl.appointments = data;
 
 
 
-            });*/
+            });
 
   
        
@@ -320,11 +320,11 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
 
                 }
                 
-                /* var changeResult=AppoinmentService.changeAppointment(param);
+                 var changeResult=AppoinmentService.changeAppointment(param);
         changeResult.then(function (data) {
             ctrl.loading = false;
 
-            if (data.status == 'OK') {
+            if (data.status == '200') {
                 sweetAlert.swal({
                     type: 'success',
                     text: 'Successfully Changed'
@@ -340,11 +340,11 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
                 });
             }
         }, function (response) {});
-  */
-                sweetAlert.swal({
+  
+               /* sweetAlert.swal({
                     type: 'success',
                     text: 'Successfully Changed'
-                });
+                });*/
             }else{
                 sweetAlert.swal({
                     text: 'No Slot selected',

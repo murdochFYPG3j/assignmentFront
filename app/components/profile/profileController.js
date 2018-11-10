@@ -5,14 +5,20 @@ angular.module('was-admin').controller('profileController', function ($scope, $r
 
     function initial() {
         
-        ctrl.selectedUserDetails={firstName:'Test',
+       /* ctrl.selectedUserDetails={firstName:'Test',
                                  lastName:'TestLast',
                                  userEmail:'email@c.com',
                                  loginId:'user',
                                   roleName:'User',
-                                 contactNo:81888888};
+                                 contactNo:81888888};*/
         
-        //ctrl.selectedUserDetails=ProfileService.getUserDetail(userID);
+       
+            var userDetailPromise=ProfileService.getUserDetail();
+        $q.all([userDetailPromise]).then(function (data) {
+            ctrl.selectedUserDetails=data;
+           
+
+        });
    //     console.log("Innital"+JSON.stringify(ctrl.nominations,null,2));
     }
     initial();
@@ -32,21 +38,21 @@ angular.module('was-admin').controller('profileController', function ($scope, $r
                 roleName:ctrl.selectedUserDetails.roleName,
                 contactNo:ctrl.selectedUserDetails.contactNo
             };
-            sweetAlert.swal({
+          /*  sweetAlert.swal({
                 type: 'success',
                 text: 'Successfully Changed'
-            });
-            //var selectedUserDetailPromise=ProfileService.updateUserDetail(param);
-           /* selectedUserDetailPromise.then(function (data) {
+            });*/
+           var selectedUserDetailPromise=ProfileService.updateUserDetail(param);
+            selectedUserDetailPromise.then(function (data) {
                 ctrl.loading = false;
 
-                if (data.status == 'OK') {
+                if (data.status == '200') {
                     sweetAlert.swal({
                         type: 'success',
                         text: 'Successfully Changed'
                     });
 
-                } else if (data.status == 'NO') {
+                } else  {
                     sweetAlert.swal({
                         text: data.result,
                         icon: "warning",
@@ -55,7 +61,7 @@ angular.module('was-admin').controller('profileController', function ($scope, $r
                         dangerMode: true,
                     });
                 }
-            }, function (response) {});*/
+            }, function (response) {});
             
         }else{
             sweetAlert.swal({

@@ -1,7 +1,7 @@
 angular.module('was-admin').service("RegisterService", function ($q, $rootScope, Restangular) {
-    var prefix = "api/v1/register/";
+    var prefix = "/auth";
     this.submitUser=function(param){
-        return Restangular.all(prefix+"submit-registraction").post(param);
+        return Restangular.all(prefix+"/register").post(param);
     };
     
 

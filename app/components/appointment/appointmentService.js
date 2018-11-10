@@ -9,8 +9,8 @@ angular.module('was-admin').service("AppoinmentService", function ($q, $rootScop
         return Restangular.all(prefix + '/get-all-appointment-list-by-search').post(params);
     };
     
-    this.getAllappointmentList = function(id){
-        return Restangular.one(prefix + '/get-all-appointmentList'+'/'+id).get();
+    this.getAllappointmentList = function(){
+        return Restangular.one( '/appointments').get();
     };
     
     this.getAllappointmentStatus = function(){
@@ -32,7 +32,7 @@ angular.module('was-admin').service("AppoinmentService", function ($q, $rootScop
     }
     
     this.changeAppointment=function(param){
-        return Restangular.all(prefix + '/change-appoinment').post(param);
+        return Restangular.all('/appointments').post(param);
     }
     
     this.createAppointment=function(param){

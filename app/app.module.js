@@ -29,21 +29,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $h
         events: true
     });
     $urlRouterProvider.otherwise('/login');
-    /*if (Constants.env === 'staging' || Constants.env === 'production') {        
-        $httpProvider.defaults.headers.common['Access-Control-Allow-Credentials'] = true;
-        $urlRouterProvider.otherwise(function($injector, $location){
-            var loginUrl= Constants.BASE_URL + "/login";
-            $injector.invoke(function($window, $timeout) { 
-                $timeout(function() {
-                    $window.location.href=loginUrl;
-                });
-            });
-            return true;
-        });                        
-    } else {
-        $urlRouterProvider.otherwise('/login');
-    }
-*/
+   
     $animateProvider.classNameFilter(/^(?:(?!no-animation).)*$/);
 
     angular.forEach(routes, function (state) {
@@ -56,51 +42,15 @@ app.config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $h
 
     $httpProvider.interceptors.push(function ($q, $rootScope, $window, $cookies) {
 
-        return {
-            'request': function (config) {
-                config.headers = config.headers || {};
-                $cookies.remove('JSESSIONID');
-                
-                if ($window.sessionStorage.token) {
-                    config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+       
+            return {
+                'request': function(config) {
+
+                    config.headers['Token'] =$window.sessionStorage.getItem('access_token');
+                    return config;
                 }
-
-                return config;
-            },
-
-            'requestError': function (rejection) {
-                // do something on error
-                if (canRecover(rejection)) {
-                    return responseOrNewPromise;
-                }
-
-                return $q.reject(rejection);
-            },
-
-            'response': function (response) {
-                // do something on success
-                if (response.headers("X-Auth-Token")) {
-                    $window.sessionStorage.token = response.headers("X-Auth-Token");
-                }
-
-                return response;
-            },
-
-            'responseError': function (rejection) {
-                // Unauthorised / Access Denied
-                if (rejection.status === 401 || rejection.status === 403 || rejection.status === -1) {
-                    if (!$rootScope.lastLocation) {
-                        //$rootScope.lastLocation = $window.location.href;
-                        $rootScope.lastSelectedRole = $rootScope.selectedRole;
-                        $rootScope.lastSelectedModule = $rootScope.selectedModule;
-                    }
-
-                    $window.location.href = Constants.BASE_URL + "/login";
-                }               
-
-                return $q.reject(rejection);
-            }
-        };
+            };
+        
     });
 
 });

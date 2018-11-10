@@ -6,10 +6,10 @@ angular.module('was-admin').directive('userSetting', ['$location', function () {
         restrict: 'E',
         replace: true,
         scope: {},
-        controller: function ($scope, $rootScope, $filter, $state, sweetAlert, $location, Restangular, Constants, $q, LoginService) {
+        controller: function ($scope, $rootScope, $filter, $state, sweetAlert, $location, Restangular, Constants, $q, LoginService,$window) {
             
             $scope.logoutUrl = Constants.LOGOUT_URL;
-            
+            $rootScope.selectedRoleCode=$window.sessionStorage.getItem('userRole')
             $scope.$state = $state;
             $rootScope.userRoleFunctions = [{name:'user',
                                         code:'user'},
@@ -34,7 +34,7 @@ angular.module('was-admin').directive('userSetting', ['$location', function () {
             
             
             $scope.updateSelectedRole = function (role) {
-                
+                sessionStorage.setItem('userRole',role.code);
                 $rootScope.selectedRoleCode=role.code;
                 console.log("$rootScope.selectedRole: " + JSON.stringify($rootScope.selectedRole, null, 2));
                 

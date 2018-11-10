@@ -1,15 +1,15 @@
 angular.module('was-admin').service("ProfileService", function ($q, $rootScope, Restangular) {
-    var prefix = "";
+    
 
 
     
 
-    this.getUserDetail = function (param) {
-        return Restangular.all(prefix + '/get-user-detail-by-id').post(param);
+    this.getUserDetail = function () {
+        return Restangular.all('/auth/me').get();
     };
     
     this.updateUserDetail=function(param){
-        return Restangular.all(prefix + '/update-user-detail').post(param);
+        return Restangular.all('/auth/me').post(param);
     }
     
 

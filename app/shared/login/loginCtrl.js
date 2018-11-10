@@ -1,4 +1,4 @@
-angular.module('was-admin').controller('LoginController', function ($scope, $rootScope, $state, $http, Constants, sweetAlert, LoginService) {
+angular.module('was-admin').controller('LoginController', function ($scope, $rootScope, $state, $http, Constants, sweetAlert, LoginService,$window,$q) {
     'use strict';
 
     var ctrl = this;
@@ -22,26 +22,44 @@ angular.module('was-admin').controller('LoginController', function ($scope, $roo
                 password: ctrl.password,
                 email: ctrl.username
             };
-            console.log("this is login "+credential.password+credential.email);
+          /*  console.log("this is login "+credential.password+credential.email);
             if(credential.email=='user@gmail.com'&&credential.password=='password'){
                 $rootScope.username='zhangqiang';
                 $rootScope.userEmail='user@gmail.com';
-                console.log("Success");
-               //var role=[];
-                /*LoginService.login(credential).then(function (result) {
+                sessionStorage.setItem('userId',100);
+                sessionStorage.setItem('userEmail','user@gmail.com');
+                sessionStorage.setItem('userName','zhangqiang');
+                sessionStorage.setItem('userRole','user');
+                
+                console.log("Success");*/
+              
+                LoginService.login(credential).then(function (result) {
                 console.info("result", result);
 
-            if (result.access_token) {
+                    if (result.access_token) {
+                        sessionStorage.setItem('access_token',result.access_token);
+                        var personDetail=LoginService.getPersonDetail();
+                        $q.all([personDetail]).then(function (data) {
+                            $rootScope.username=data.firstName +' '+data.lastName;
+                            $rootScope.userEmail=data.email;
+                            sessionStorage.setItem('userId',data.id);
+                            sessionStorage.setItem('userEmail',data.email);
+                            sessionStorage.setItem('userName',data.firstName +' '+data.lastName);
+                            sessionStorage.setItem('userRole',data.role);
+                    
+                            $state.go('landing.view');
 
-                    $state.go('landing.view');
+                        });
+
+                    
 
 
 
                 } else {
-                    ctrl.credentialDto = result;
+                    ctrl.credentialDto = 'Incorrect user email/password';
                 }
-            });*/
-                $rootScope.selectedRoleCode='user';
+            });
+               // $rootScope.selectedRoleCode='user';
                 if($rootScope.selectedRoleCode==='user'){
                     $state.go('appointment.list');
                 }else{
@@ -49,11 +67,11 @@ angular.module('was-admin').controller('LoginController', function ($scope, $roo
                 }
                
                 
-            }else{
+           /* }else{
                 console.log('run');
                 ctrl.credentialDto=[];
                 ctrl.credentialDto.reason ='Wrong password, user name is user@gmail.com, password is password';
-            }
+            }*/
         
         }else{
             ctrl.credentialDto.reason ='please enter correct user name and password';
