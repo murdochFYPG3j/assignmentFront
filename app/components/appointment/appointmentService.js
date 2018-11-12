@@ -10,14 +10,15 @@ angular.module('was-admin').service("AppoinmentService", function ($q, $rootScop
     };
     
     this.getAllappointmentList = function(){
-        return Restangular.one( '/appointments').get();
+        return Restangular.one( '/appointment-slots').get();
     };
     
     this.getAllappointmentStatus = function(){
         return Restangular.one(prefix + '/get-all-appointment-status').get();
     };
-    this.getAllSlotFromMonth = function (month){
-        return Restangular.all(prefix + '/get-all-appointment-slot').post(month);
+    this.getAllSlotFromMonth = function (year,month){
+        var urlLink="?year="+year+'&month='+month;
+        return Restangular.one("/appointment-slots/available"+urlLink).get();
     };
     this.downloadCsv = function (month){
         return Restangular.all(prefix + '/download-all-appointment-list').post(month);

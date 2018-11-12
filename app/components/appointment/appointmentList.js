@@ -176,61 +176,7 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
             console.log('Modal dismissed at: ' + new Date());
         });*/
     };
-    ctrl.saveConfirm = function () {
-       
-        if (ctrl.maxCount!=4) {
-            sweetAlert.swal({
-                text: "There must be a total of 4 featured collection ",
-                type: 'warning',
-                icon: 'warning',
-                confirmButtonText: "Ok",
-            });
-        }
-        else {
-            var updateinputValue = sweetAlert.swal({
-                text: "Do you want to continue ?",
-                showCancelButton: true,
-                confirmButtonText: "Continue",
-            }).then(function (response) {
-                if (response.value == true) {
-                    var param = [];
-                    angular.forEach(ctrl.specialCollectionList, function (data) {
-                        param.push({
-                            id: data,
-                            featureFlagCode:Constants.FEATURE_FLAG_YES,
-                            
-                        });
-                    });
-
-                    
-                    var result = SpecialCollectionService.saveSpecialCollection(param);
-                    result.then(function (data) {
-                        ctrl.loading = false;
-                      
-                        if (data.successFlag == 'YES') {
-                            sweetAlert.swal({
-                                type: 'success',
-                                text: data.result
-                            });
-                            PaginationService.resetPagination(ctrl,0,Constants.PAGE_SIZE);
-                            ctrl.initial();
-                            ctrl.maxCount = 0;
-                            
-                            ctrl.paginate(ctrl.tableState);
-                        } else if (data.successFlag == 'NO') {
-                            sweetAlert.swal({
-                                text: data.result,
-                                icon: "warning",
-                                type: "warning",
-                                buttons: true,
-                                dangerMode: true,
-                            });
-                        }
-                    }, function (response) {});
-                } else {}
-            });
-            }
-    };
+ 
     
     ctrl.changeAppointment=function(){
         ctrl.change=true;

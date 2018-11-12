@@ -45,8 +45,9 @@ app.config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $h
        
             return {
                 'request': function(config) {
-
-                    config.headers['Token'] =$window.sessionStorage.getItem('access_token');
+                    var toaken1=$window.sessionStorage.getItem('access_token');
+                    var toaken2=$window.sessionStorage.access_token;
+                    config.headers.Authorization = 'Bearer ' + $window.sessionStorage.getItem('access_token');
                     return config;
                 }
             };

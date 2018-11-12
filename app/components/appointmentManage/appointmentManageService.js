@@ -1,5 +1,6 @@
-angular.module('was-admin').service("AppointmentManagementService", function ($q, $rootScope, Restangular,) {
-    var prefix = "api/v1/special-collection";
+
+angular.module('was-admin').service("AppointmentManagementService", function ($q, $rootScope, Restangular) {
+
 
 /*    this.updateSpecialCollection = function (params) {
         return Restangular.all(prefix + '/update-special-collection').post(params);
@@ -7,8 +8,8 @@ angular.module('was-admin').service("AppointmentManagementService", function ($q
 
     
     
-    this.getAllappointmentList = function(month){
-        return Restangular.one(prefix + '/get-all-appointmentList'+'/'+id).get();
+    this.getAllappointmentList = function(){
+        return Restangular.one( '/get-all-appointmentList'+'/').get();
     };
     this.getSetupImport=function(uploadForm){
         console.log('upload file');

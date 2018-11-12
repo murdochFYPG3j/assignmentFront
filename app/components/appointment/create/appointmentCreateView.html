@@ -1,13 +1,13 @@
 <style>
     .myOwnBg {
-        background-color:  #4dbd74 !important;
+        background-color:  #D2F6F7 !important;
     }
 </style>
 <div class="card">
     <div class="card-header"> <span class="fa fa-plus"></span> Create New Appointment
         <div class="pull-right">
             <button class="btn btn-outline-primary" type="button"  ui-sref="appointment.list"><span class="fa fa-backward"></span> Back to Listing </button>
-            <button class="btn btn-outline-danger" type="button" ng-disabled="ctrl.titleInvalid||ctrl.descriptionInvalid||ctrl.uploadImageInvalid" ng-click="ctrl.createSpecialCollection()"><span class="fa fa-save"></span> Save Appointment</button>
+          <!--  <button class="btn btn-outline-danger" type="button" ng-disabled="ctrl.titleInvalid||ctrl.descriptionInvalid||ctrl.uploadImageInvalid" ng-click="ctrl.createSpecialCollection()"><span class="fa fa-save"></span> Save Appointment</button>-->
         </div>
     </div>
     <div class="card-body">
@@ -58,8 +58,8 @@
                 <tbody>
                     <tr ng-repeat=" week in appointmentsVar">
                         <td style="min-width: 100px; max-width: 100px;"></td>
-                        <td ng-disbled="week.Monday.status=='full'">
-                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Monday.status=='available'}">
+                        <td ng-disbled="week.Monday.status=='full'" style="padding: 0;!important">
+                            <div style="height: 100px;width: 140px;border-style: solid; border-width: thin;" ng-class="{'myOwnBg':week.Monday.status=='available'}">
                                 <div ng-class="{'myOwnBg':week.Monday.status=='available'}">
                                     <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to create appointment" tooltip-placement="left" ng-if="week.Monday.status!=='full'" ng-click="ctrl.displayDay(week.Monday)"> <h1 >{{week.Tuesday.day}}</h1> </a>
                                 </div>
@@ -71,8 +71,8 @@
                                     <h1>{{week.Monday.day}}</h1></div>
                             </div>-->
                         </td>
-                        <td>
-                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Tuesday.status=='available'}">
+                        <td style="padding: 0;!important">
+                            <div style="height: 100px;width: 140px;border-style: solid; border-width: thin;" ng-class="{'myOwnBg':week.Tuesday.status=='available'}">
                                 <div ng-class="{'myOwnBg':week.Tuesday.status=='available'}">
                                     <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to create appointment" tooltip-placement="left" ng-if="week.Tuesday.status!=='full'" ng-click="ctrl.displayDay(week.Tuesday)"> <h1 >{{week.Tuesday.day}}</h1> </a>
                                 </div>
@@ -84,8 +84,8 @@
                                     <h1>{{week.Tuesday.day}}</h1></div>
                             </div>-->
                         </td>
-                        <td>
-                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Wednesday.status=='available'}">
+                        <td style="padding: 0;!important">
+                            <div style="height: 100px;width: 140px;border-style: solid; border-width: thin;" ng-class="{'myOwnBg':week.Wednesday.status=='available'}">
                                 <div ng-class="{'myOwnBg':week.Wednesday.status=='available'}">
                                     <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to create appointment" tooltip-placement="left" ng-if="week.Wednesday.status!=='full'" ng-click="ctrl.displayDay(week.Wednesday)"> <h1 >{{week.Thuesday.day}}</h1> </a>
                                 </div>
@@ -97,8 +97,8 @@
                                     <h1>{{week.Wednesday.day}}</h1></div>
                             </div>-->
                         </td>
-                        <td>
-                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Thuesday.status=='available'}">
+                        <td style="padding: 0;!important">
+                            <div style="height: 100px;width: 140px;border-style: solid; border-width: thin;" ng-class="{'myOwnBg':week.Thuesday.status=='available'}">
                                 <div ng-class="{'myOwnBg':week.Thuesday.status=='available'}">
                                     <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to create appointment" tooltip-placement="left" ng-if="week.Thuesday.status!=='full'" ng-click="ctrl.displayDay(week.Thuesday)"> <h1 >{{week.Thuesday.day}}</h1> </a>
                                 </div>
@@ -110,8 +110,8 @@
                                     <h1>{{week.Thuesday.day}}</h1></div>
                             </div>-->
                         </td>
-                        <td>
-                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Friday.status=='available'}">
+                        <td style="padding: 0;!important">
+                            <div style="height: 100px;width: 140px;border-style: solid; border-width: thin;" ng-class="{'myOwnBg':week.Friday.status=='available'}">
                                 <div ng-class="{'myOwnBg':week.Friday.status=='available'}">
                                     <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to create appointment" tooltip-placement="left" ng-if="week.Friday.status!=='full'" ng-click="ctrl.displayDay(week.Friday)"> <h1 >{{week.Friday.day}}</h1> </a>
                                 </div>
@@ -123,8 +123,8 @@
                                     <h1>{{week.Friday.day}}</h1></div>
                             </div>-->
                         </td>
-                        <td  >
-                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Saturday.status=='available'}">
+                        <td  style="padding: 0;!important">
+                            <div style="height: 100px;width: 140px;border-style: solid; border-width: thin;" ng-class="{'myOwnBg':week.Saturday.status=='available'}">
                                 <div ng-class="{'myOwnBg':week.Saturday.status=='available'}">
                                     <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to create appointment" tooltip-placement="left" ng-if="week.Saturday.status!=='full'" ng-click="ctrl.displayDay(week.Saturday)"> <h1 >{{week.Saturday.day}}</h1> </a>
                                     </div>
@@ -134,8 +134,11 @@
                             
                             
                         </td>
-                        <td>
-                            <div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Sunday.status=='available'}">
+                        <td style="padding: 0;!important">
+                            <div style="height: 100px;width: 140px;border-style: solid; border-width: thin;" ng-class="{'myOwnBg':week.Sunday.status=='available'}">
+                                <div ng-class="{'myOwnBg':week.Sunday.status=='available'}">
+                                    <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to create appointment" tooltip-placement="left" ng-if="week.Sunday.status!=='full'" ng-click="ctrl.displayDay(week.Sunday)"> <h1 >{{week.Sunday.day}}</h1> </a>
+                                </div>
                                 <div>
                                     <h1>{{week.Sunday.day}}</h1></div>
                             </div>

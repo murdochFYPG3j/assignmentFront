@@ -78,18 +78,25 @@ angular.module('was-admin').controller('appointmentCreateController', function (
     }
     ctrl.initial = function () {
         var day=new Date();
-        var month=day.getMonth();
-       /* var appoinmentPromise=AppoinmentService.getAllSlotFromMonth(month);
+       // var month=day.getMonth();
        
-        $q.all([appoinmentPromise]).then(function (data) {
-            
-            ctrl.appointmentMonths = data;
-
-
-
-        });*/
+        //var currentDay= new Date();
         
-        ctrl.appointmentMonths=[
+        ctrl.selectedMonth=day.getMonth();
+        var year=day.getYear();
+        var appoinmentPromise=AppoinmentService.getAllSlotFromMonth(year,ctrl.selectedMonth);
+
+        $q.all([appoinmentPromise]).then(function (data) {
+
+            ctrl.appointmentMonthList = data;
+            angul
+
+
+
+        });
+        
+        
+       /* ctrl.appointmentMonths=[
                               {Monday:
                                {
                                  status:'full',
@@ -199,7 +206,7 @@ angular.module('was-admin').controller('appointmentCreateController', function (
                                 Sunday:{status:'full',
                                 day:28,
                                 isInMonth:'NO'}}
-                                ]
+                                ]*/
         //ctrl.clearSearchKey();
     };
     ctrl.initial();

@@ -75,7 +75,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat=" appointment in appointmentsVar">
-                            <td class="text-center" style="text-align: center">
+                            <td class="text-center" style="text-align: center; font-size: 20px;font-weight: 900;">
                                 <a href="" ng-click="ctrl.showDetailPage(appointment)"data-toggle="modal" data-target="#appointmentDetail" uib-tooltip="Click to view appointment" tooltip-placement="left" >{{appointment.id}}</a></td>
                             <td class="text-center"> 
                                 <span class="badge badge-danger" ng-model="appointment.statusCode" ng-if="appointment.statusName=='Rejected'">{{appointment.statusName}}</span> 

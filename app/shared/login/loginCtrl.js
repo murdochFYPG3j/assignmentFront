@@ -40,14 +40,21 @@ angular.module('was-admin').controller('LoginController', function ($scope, $roo
                         sessionStorage.setItem('access_token',result.access_token);
                         var personDetail=LoginService.getPersonDetail();
                         $q.all([personDetail]).then(function (data) {
-                            $rootScope.username=data.firstName +' '+data.lastName;
-                            $rootScope.userEmail=data.email;
-                            sessionStorage.setItem('userId',data.id);
-                            sessionStorage.setItem('userEmail',data.email);
-                            sessionStorage.setItem('userName',data.firstName +' '+data.lastName);
-                            sessionStorage.setItem('userRole',data.role);
-                    
-                            $state.go('landing.view');
+                            console.info("result", JSON.stringify(data[0], null, 2));
+                            $rootScope.username=data[0].first_name +' '+data[0].last_name;
+                            $rootScope.userEmail=data[0].email;
+                            $rootScope.selectedRoleCode=data[0].role;
+                            sessionStorage.setItem('userId',data[0].id);
+                            sessionStorage.setItem('userEmail',data[0].email);
+                            sessionStorage.setItem('userName',data[0].first_name +' '+data[0].last_name);
+                            sessionStorage.setItem('userRole',data[0].role);
+                            console.info("result"+$rootScope.username);
+                           // $state.go('landing.view');
+                            if($rootScope.selectedRoleCode==='attendee'){
+                                $state.go('appointment.list');
+                            }else{
+                                $state.go('landing.view');
+                            }
 
                         });
 
@@ -60,11 +67,7 @@ angular.module('was-admin').controller('LoginController', function ($scope, $roo
                 }
             });
                // $rootScope.selectedRoleCode='user';
-                if($rootScope.selectedRoleCode==='user'){
-                    $state.go('appointment.list');
-                }else{
-                    $state.go('landing.view');
-                }
+               
                
                 
            /* }else{
