@@ -15,11 +15,11 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
         };
         ctrl.change=false;
         ctrl.allStatuses=[{name:'Pending',
-                          code:'PENDING'},
+                           code:'Pending'},
                           {name:'Approved',
-                          code:'APROVED'},
+                           code:'Approved'},
                           {name:'Rejected',
-                          code:'REJECTED'}]
+                           code:'Rejected'}]
         /* var allStutasPromise = AppoinmentService.getAllappointmentStatus();
         
         $q.all([SpecialCollectionTypePromise, SpecialCollectionStatusPromise]).then(function (data) {
@@ -92,91 +92,13 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
 
     
     
-        //initial ajax call at first time
-    $scope.$watch('ctrl.tableState', function (tableState) {
-        
-        if (tableState) {
-            ctrl.paginate(tableState);
-        }
-    });
-    ctrl.paginate = function (tableState) {
-        //console.log("ctrl "+JSON.stringify(ctrl,null,2));
-        if (PaginationService.initPagination(ctrl, tableState)) {
-            PaginationService.setPaginationSearch(ctrl, tableState);
-            if( ctrl.searchStartDate){
-                ctrl.mergedSearchDTO.publishedStartDate=ctrl.searchStartDate;
-            }
-            if( ctrl.searchEndDate){
-               var date = new Date(ctrl.searchEndDate);
-                var CurrentDay = date.getDate();
-                CurrentDay=CurrentDay+1;
-                date.setDate(CurrentDay);
-                var endDate=date;
-                ctrl.mergedSearchDTO.publishedEndDate=endDate;
-            }
-            ctrl.appointments=[{id:1,
-                                statusName:'Pending',
-                                statusCode:'PENDING',
-                                startTime:new Date(),
-                                endTime:new Date()},
-                               {id:2,
-                                statusName:'Approved',
-                                statusCode:'APROVED',
-                                startTime:new Date(),
-                                endTime:new Date()},
-                               {id:3,
-                                statusName:'Rejected',
-                                statusCode:'REJECTED',
-                                startTime:new Date(),
-                                endTime:new Date()}];
-            /* var resultPromise = AppoinmentService.getAllAppointmentListBySearch(ctrl.mergedSearchDTO);
-            $q.all([resultPromise]).then(function (data) {
-                PaginationService.setPaginationResult(ctrl, tableState, data);
-                ctrl.websites = ctrl.records;
-               
-                        
-           
-            });*/
-           
-        }
-    };
+
     ctrl.downloadCsv = function () {
         return AppoinmentService.downloadCsv(ctrl.mergedSearchDTO);
     };
     
 
-    
-    ctrl.showDetailPage = function (app) {
-       
-       /* console.log('run1');
-        var modalInstance = $uibModal.open({
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'app/components/appointment/appointmentDetailView.html',
-            controller: 'AppointmentDetailController',
-            controllerAs: 'ctrl',
-            size: 'lg',
-            resolve: {
-                appointments: function () {
-                    return ctrl.appointments;
-                },
-                app: function () {
-                    return app;
-                }
-            }
-        });
-        console.log('run2');
-        modalInstance.result.then(function () {
-            //ctrl.selected = selectedItem;
-            console.log('run333');
-        }, function () {
-            console.log("run reload");
-            ctrl.initial();
-            ctrl.paginate(ctrl.tableState);
-            console.log('Modal dismissed at: ' + new Date());
-        });*/
-    };
- 
+
     
     ctrl.changeAppointment=function(){
         ctrl.change=true;
@@ -184,8 +106,19 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
             startTime:ctrl.selectedAppointment.startTime,
             endTime:ctrl.selectedAppointment.endTime
         }
-        //ctrl.appointmentList=AppoinmentService.getAllAppointmentListByDay(param);
-        ctrl.appointmentList=[{
+        ctrl.appointmentList=[];
+        ctrl.hasAvailableSlot=false;
+        var appointmentListPromise= AppoinmentService.getAllSlotFromMonth(2018,ctrl.selectedMonth);
+        $q.all([appointmentListPromise]).then(function (data) {
+            var allAvailiableList = data.days;
+            angular.forEach(allAvailiableList,function(data2){
+                if(data2.dayName===ctrl.selectedDay){
+                    ctrl.saveAppintment=true;
+                    ctrl.appointmentList=data2.slots;
+                }
+            });
+        });
+        /*ctrl.appointmentList=[{
             id:'1',
             startTime:"12:00:00",
             endTime:"13:00:00",
@@ -195,17 +128,21 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
             endTime:"14:00:00",
             location:'room 1'
         }
-                             ]
+                             ]*/
     }
     
     ctrl.showDetailPage=function(param){
         ctrl.selectedAppointment={
             id:param.id,
-            startTime:param.startTime,
-            endTime:param.endTime,
-            status:param.statusName,
+            startTime:param.starts_at,
+            endTime:param.ends_at,
+            status:param.status,
             location:'room 1'
         };
+            var dateFormat=new Date(param.starts_at);
+            console.log('change to day'+dateFormat);
+            ctrl.selectedMonth=dateFormat.getMonth();
+            ctrl.selectedDay=dateFormat.getDate();
     };
     ctrl.closeModal=function(){
         console.log("close");
@@ -216,23 +153,23 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
         ctrl.change=false;
     };
     ctrl.cancelAppintment=function(){
-        sweetAlert.swal({
+        /*sweetAlert.swal({
             type: 'success',
             text: 'Successfully Deleted'
-        });
-        /* var cancelResult=AppoinmentService.cancelAppointment(ctrl.selectedAppointment.id);
+        });*/
+         var cancelResult=AppoinmentService.cancelAppointment(ctrl.selectedAppointment.id);
         cancelResult.then(function (data) {
             ctrl.loading = false;
 
-            if (data.status == 'OK') {
+            if (data.Response ==='200 OK') {
                 sweetAlert.swal({
                     type: 'success',
                     text: 'Successfully Deleted'
                 });
 
-            } else if (data.status == 'NO') {
+            } else  {
                 sweetAlert.swal({
-                    text: data.result,
+                    text: 'Please screenShot and report to developer',
                     icon: "warning",
                     type: "warning",
                     buttons: true,
@@ -240,13 +177,13 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
                 });
             }
         }, function (response) {});
-  */
+  
     };
         ctrl.saveAppintment=function(){
             console.log("run change");
             var selectedAppointmentID=[];
             var isSelected=false;
-            if( ctrl.appointmentList.length>1){
+            /*if( ctrl.appointmentList.length>1){
                 angular.forEach(ctrl.appointmentList,function(data){
                     if(data.isSelected==='YES'){
                         isSelected=true;
@@ -256,17 +193,21 @@ angular.module('was-admin').controller('AppointmentListController', function ($s
                         });
                     }
                 });
+            }*/
+            
+            if(ctrl.isSelected){
+                isSelected=true;
             }
            
             if(isSelected){
-                var param={
+               /* var param={
                     previousAppoinmentID:ctrl.selectedAppointment.id,
                     selectedSlots:selectedAppointmentID,
                     userEmail:$rootScope.userEmail
 
-                }
-                
-                 var changeResult=AppoinmentService.changeAppointment(param);
+                }*/
+                AppoinmentService.cancelAppointment(ctrl.selectedAppointment.id);
+                var changeResult=AppoinmentService.createAppointment(ctrl.isSelected.id);
         changeResult.then(function (data) {
             ctrl.loading = false;
 

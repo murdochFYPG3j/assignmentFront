@@ -4,15 +4,15 @@ angular.module('was-admin').controller('RoleManagementController', function ($sc
     var ctrl = this;
     ctrl.initial=function(){
         
-/*        var getAllUserPromise=UserManagementService.getAllUser()
+        var getAllUserPromise=UserManagementService.getAllUser();
         $q.all([getAllUserPromise]).then(function (data) {
 
             ctrl.users = data;
 
 
 
-        });*/
-        ctrl.users=[{id:1,
+        });
+       /* ctrl.users=[{id:1,
                      firstName:'user1',
                      lastName:'lastName',
                     email:'test@.email',
@@ -30,7 +30,7 @@ angular.module('was-admin').controller('RoleManagementController', function ($sc
                      role:'admin',
                      email:'test3@.email',
                      contact:81260314}];
-    };
+    };*/
     ctrl.initial();
     ctrl.showUserDetail=function(user){
         ctrl.selecteduser=user;
@@ -38,14 +38,15 @@ angular.module('was-admin').controller('RoleManagementController', function ($sc
     
     ctrl.updateUser=function(){
         var param={
-            userId:ctrl.selecteduser.id,
+           
             userEmail:ctrl.selecteduser.email,
-            firstName:ctrl.selecteduser.firstName,
-            lastName:ctrl.selecteduser.lastName,
-            roleName:ctrl.selecteduser.role,
-            contactNo:ctrl.selecteduser.contact
+            first_name:ctrl.selecteduser.first_name,
+            last_name:ctrl.selecteduser.last_name,
+            role:ctrl.selecteduser.role/*,
+            contactNo:ctrl.selecteduser.contact*/
         };
-        //var updateUser=UserManagementService.updateUser(param)
+        var id=ctrl.selecteduser.id;
+        var updateUser=UserManagementService.updateUser(id,param)
         sweetAlert.swal({
             type: 'success',
             text: 'Successfully Changed'

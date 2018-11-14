@@ -1,47 +1,81 @@
-angular.module('was-admin').controller('appointmentCreateController', function ($scope, $rootScope, $stateParams, AppoinmentService, $state, FileUploader, sweetAlert, Constants,$window, PaginationService, $q) {
+angular.module('was-admin').controller('appointmentCreateController', function ($scope, $rootScope, $stateParams, AppoinmentService, $state, FileUploader, sweetAlert, Constants, $window, PaginationService, $q) {
     'use strict';
     var ctrl = this;
-    ctrl.changeMonth=function(){
-        console.log('change month'+ctrl.selectedMonth)
-        var param={month:11}
-        /* var appoinmentPromise=AppoinmentService.getAllSlotFromMonth(month);
-
+    ctrl.changeMonth = function () {
+        console.log('change month' + ctrl.selectedMonth)
+        angular.forEach(ctrl.appointmentMonthList, function(data){
+            if(ctrl.selectedMonth===data.month){
+                ctrl.appointmentMonthList=data.weeks;
+            }
+        });
+        var appoinmentPromise = AppoinmentService.getAllSlotFromMonth(2018, ctrl.selectedMonth);
         $q.all([appoinmentPromise]).then(function (data) {
+            var allAvailiableList = data.days;
+            angular.forEach(allAvailiableList,function(data2){
+                angular.forEach(ctrl.appointmentMonthList,function(data1){
+                    if(data2.dayName===data1.Monday.day){
+                        data1.Monday.slots=data2.slots;
+                        data1.Monday.status='available';
+                    }
+                    if(data2.dayName===data1.Tuesday.day){
+                        data1.Tuesday.slots=data2.slots;
+                        data1.Tuesday.status='available';
+                    }
+                    if(data2.dayName===data1.Wednesday.day){
+                        data1.Wednesday.slots=data2.slots;
+                        data1.Wednesday.status='available';
+                    }
+                    if(data2.dayName===data1.Thuesday.day){
+                        data1.Thuesday.slots=data2.slots;
+                        data1.Thuesday.status='available';
+                    }
+                    if(data2.dayName===data1.Friday.day){
+                        data1.Friday.slots=data2.slots;
+                        data1.Friday.status='available';
+                    }
+                    if(data2.dayName===data1.Saturday.day){
+                        data1.Saturday.slots=data2.slots;
+                        data1.Saturday.status='available';
+                    }
+                    if(data2.dayName===data1.Sunday.day){
+                        data1.Sunday.slots=data2.slots;
+                        data1.Sunday.status='available';
+                    }
+                });
+            });
+        });
+            /* var appoinmentPromise=AppoinmentService.getAllSlotFromMonth(month);
 
-            ctrl.appointmentMonths = data;
+            $q.all([appoinmentPromise]).then(function (data) {
+
+                ctrl.appointmentMonths = data;
 
 
 
-        });*/
+            });*/
     }
-    ctrl.displayDay=function(day){
-        ctrl.slots=day.slots;
+    ctrl.displayDay = function (day) {
+        ctrl.slots = day.slots;
     }
-    ctrl.saveAppintment=function(){
+    ctrl.saveAppintment = function () {
         console.log("run change");
-        var selectedAppointmentID=[];
-        var isSelected=false;
-        if( ctrl.slots.length>1){
-            angular.forEach(ctrl.slots,function(data){
-                if(data.isSelected==='YES'){
-                    isSelected=true;
-                    console.log('check data'+data.id);
+        var selectedAppointmentID = [];
+        var isSelected = false;
+        /*if (ctrl.slots.length > 1) {
+            angular.forEach(ctrl.slots, function (data) {
+                if (data.isSelected === 'YES') {
+                    isSelected = true;
+                    console.log('check data' + data.id);
                     selectedAppointmentID.push({
-                        id:data.id
+                        id: data.id
                     });
                 }
             });
-        }
-
-        if(isSelected){
-            var param={
-                
-                selectedSlots:selectedAppointmentID,
-                userEmail:$rootScope.userEmail
-
-            }
-
-            /* var changeResult=AppoinmentService.createAppointment(param);
+        }*/
+        if(ctrl.isSelected){isSelected=true;}
+        if (isSelected) {
+            var param = ctrl.isSelected.id;
+                 var changeResult=AppoinmentService.createAppointment(param);
         changeResult.then(function (data) {
             ctrl.loading = false;
 
@@ -61,160 +95,520 @@ angular.module('was-admin').controller('appointmentCreateController', function (
                 });
             }
         }, function (response) {});
-  */
+  
+           /* sweetAlert.swal({
+                type: 'success'
+                , text: 'Successfully save'
+            });*/
+        }
+        else {
             sweetAlert.swal({
-                type: 'success',
-                text: 'Successfully save'
-            });
-        }else{
-            sweetAlert.swal({
-                text: 'No Slot selected',
-                icon: "warning",
-                type: "warning",
-                buttons: true,
-                dangerMode: true,
-            });
+                text: 'No Slot selected'
+                , icon: "warning"
+                , type: "warning"
+                , buttons: true
+                , dangerMode: true
+            , });
         }
     }
     ctrl.initial = function () {
-        var day=new Date();
-       // var month=day.getMonth();
-       
+        var day = new Date();
+        // var month=day.getMonth();
         //var currentDay= new Date();
-        
-        ctrl.selectedMonth=day.getMonth();
-        var year=day.getYear();
-        var appoinmentPromise=AppoinmentService.getAllSlotFromMonth(year,ctrl.selectedMonth);
+        ctrl.selectedMonth = day.getMonth();
+        var year = day.getYear();
+        ctrl.selectedMonth=11;
+        year=2018;
+        ctrl.appointmentMonthList = [{
+            month: 11
+            , weeks: [{
+                Monday: {
+                    status: 'full'
+                    , day: ''
+                    , slots: []
+                }
+                , Tuesday: {
+                    status: 'full'
+                    , day: ''
+                    , slots: []
+                }
+                , Wednesday: {
+                    status: 'full'
+                    , day: ''
+                    , slots: []
+                }
+                , Thuesday: {
+                    status: 'full'
+                    , day: 1
+                    , isInMonth: 'YES'
+                    , slots: []
+                }
+                , Friday: {
+                    status: 'full'
+                    , day: 2
+                    , isInMonth: 'YES'
+                    , slots: []
+                }
+                , Saturday: {
+                    status: 'full'
+                    , day: 3
+                    , isInMonth: 'YES'
+                    , slots: []
+                }
+                , Sunday: {
+                    status: 'full'
+                    , day: 4
+                    , isInMonth: 'YES'
+                    , slots: []
+                }
+            }
+                      , {
+                          Monday: {
+                              status: 'full'
+                              , day: 5
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Tuesday: {
+                              status: 'full'
+                              , day: 6
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Wednesday: {
+                              status: 'full'
+                              , day: 7
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Thuesday: {
+                              status: 'full'
+                              , day: 8
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Friday: {
+                              status: 'full'
+                              , day: 9
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Saturday: {
+                              status: 'full'
+                              , day: 10
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Sunday: {
+                              status: 'full'
+                              , day: 11
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                      }
+                      , {
+                          Monday: {
+                              status: 'full'
+                              , day: 12
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Tuesday: {
+                              status: 'full'
+                              , day: 13
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Wednesday: {
+                              status: 'full'
+                              , day: 14
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Thuesday: {
+                              status: 'full'
+                              , day: 15
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Friday: {
+                              status: 'full'
+                              , day: 16
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Saturday: {
+                              status: 'full'
+                              , day: 17
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Sunday: {
+                              status: 'full'
+                              , day: 18
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                      }
+                      , {
+                          Monday: {
+                              status: 'full'
+                              , day: 19
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Tuesday: {
+                              status: 'full'
+                              , day: 20
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Wednesday: {
+                              status: 'full'
+                              , day: 21
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Thuesday: {
+                              status: 'full'
+                              , day: 22
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Friday: {
+                              status: 'full'
+                              , day: 23
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Saturday: {
+                              status: 'full'
+                              , day: 24
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Sunday: {
+                              status: 'full'
+                              , day: 25
+                              , isInMonth: 'NO'
+                              , slots: []
+                          }
+                      },
+                      {
+                          Monday: {
+                              status: 'full'
+                              , day: 26
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Tuesday: {
+                              status: 'full'
+                              , day: 27
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Wednesday: {
+                              status: 'full'
+                              , day: 28
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Thuesday: {
+                              status: 'full'
+                              , day: 29
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Friday: {
+                              status: 'full'
+                              , day: 30
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Saturday: {
+                              status: 'full'
+                              , day: ''
+                              , isInMonth: 'YES'
+                              , slots: []
+                          }
+                          , Sunday: {
+                              status: 'full'
+                              , day: ''
+                              , isInMonth: 'NO'
+                              , slots: []
+                          }
+                      }]
+        }
+           , {
+               month: 12
+               , weeks: [{
+                   Monday: {
+                       status: 'full'
+                       , day: ''
+                       , slots: []
+                   }
+                   , Tuesday: {
+                       status: 'full'
+                       , day: ''
+                       , slots: []
+                   }
+                   , Wednesday: {
+                       status: 'full'
+                       , day: ''
+                       , slots: []
+                   }
+                   , Thuesday: {
+                       status: 'full'
+                       , day: ''
+                       , isInMonth: 'YES'
+                       , slots: []
+                   }
+                   , Friday: {
+                       status: 'full'
+                       , day: ''
+                       , isInMonth: 'YES'
+                       , slots: []
+                   }
+                   , Saturday: {
+                       status: 'full'
+                       , day: 1
+                       , isInMonth: 'YES'
+                       , slots: []
+                   }
+                   , Sunday: {
+                       status: 'full'
+                       , day: 2
+                       , isInMonth: 'YES'
+                       , slots: []
+                   }
+               }
+                         , {
+                             Monday: {
+                                 status: 'full'
+                                 , day: 3
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Tuesday: {
+                                 status: 'full'
+                                 , day: 4
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Wednesday: {
+                                 status: 'full'
+                                 , day: 5
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Thuesday: {
+                                 status: 'full'
+                                 , day: 6
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Friday: {
+                                 status: 'full'
+                                 , day: 7
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Saturday: {
+                                 status: 'full'
+                                 , day: 8
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Sunday: {
+                                 status: 'full'
+                                 , day: 9
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                         }
+                         , {
+                             Monday: {
+                                 status: 'full'
+                                 , day: 10
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Tuesday: {
+                                 status: 'full'
+                                 , day: 11
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Wednesday: {
+                                 status: 'full'
+                                 , day: 12
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Thuesday: {
+                                 status: 'full'
+                                 , day: 13
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Friday: {
+                                 status: 'full'
+                                 , day: 14
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Saturday: {
+                                 status: 'full'
+                                 , day: 15
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Sunday: {
+                                 status: 'full'
+                                 , day: 16
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                         }
+                         , {
+                             Monday: {
+                                 status: 'full'
+                                 , day: 17
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Tuesday: {
+                                 status: 'full'
+                                 , day: 18
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Wednesday: {
+                                 status: 'full'
+                                 , day: 19
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Thuesday: {
+                                 status: 'full'
+                                 , day: 20
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Friday: {
+                                 status: 'full'
+                                 , day: 21
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Saturday: {
+                                 status: 'full'
+                                 , day: 22
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Sunday: {
+                                 status: 'full'
+                                 , day: 23
+                                 , isInMonth: 'NO'
+                                 , slots: []
+                             }
+                         } ,{
+                             Monday: {
+                                 status: 'full'
+                                 , day: 24
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Tuesday: {
+                                 status: 'full'
+                                 , day: 25
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Wednesday: {
+                                 status: 'full'
+                                 , day: 26
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Thuesday: {
+                                 status: 'full'
+                                 , day: 27
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Friday: {
+                                 status: 'full'
+                                 , day: 28
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Saturday: {
+                                 status: 'full'
+                                 , day: 29
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Sunday: {
+                                 status: 'full'
+                                 , day: 30
+                                 , isInMonth: 'NO'
+                                 , slots: []
+                             }
+                         }, {
+                             Monday: {
+                                 status: 'full'
+                                 , day: 31
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Tuesday: {
+                                 status: 'full'
+                                 , day: ''
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Wednesday: {
+                                 status: 'full'
+                                 , day: ''
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Thuesday: {
+                                 status: 'full'
+                                 , day: ''
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Friday: {
+                                 status: 'full'
+                                 , day: ''
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Saturday: {
+                                 status: 'full'
+                                 , day: ''
+                                 , isInMonth: 'YES'
+                                 , slots: []
+                             }
+                             , Sunday: {
+                                 status: 'full'
+                                 , day: ''
+                                 , isInMonth: 'NO'
+                                 , slots: []
+                             }
+                         }
 
-        $q.all([appoinmentPromise]).then(function (data) {
-
-            ctrl.appointmentMonthList = data;
-            angul
+                        ]
+           }
 
 
-
-        });
-        
-        
-       /* ctrl.appointmentMonths=[
-                              {Monday:
-                               {
-                                 status:'full',
-                                  day:1,
-                                 isInMonth:'YES'},
-                                Tuesday:{
-                                status:'full',
-                                day:2,
-                                isInMonth:'YES'},
-                                Wednesday:{status:'full',
-                                day:3,
-                                isInMonth:'YES'},
-                                
-                                Thuesday:{status:'full',
-                                day:4,
-                                isInMonth:'YES'},
-                                Friday:{status:'full',
-                                day:5,
-                                isInMonth:'YES'},
-                                Saturday:{status:'full',
-                                day:6,
-                                isInMonth:'YES'},
-                                Sunday:{status:'full',
-                                day:7,
-                                isInMonth:'YES'}},
-                                {Monday:{
-                                status:'full',
-                                day:8,
-                                isInMonth:'YES'},
-                                Tuesday:{
-                                status:'full',
-                                day:9,
-                                isInMonth:'YES'},
-                                Wednesday:{status:'full',
-                                day:10,
-                                isInMonth:'YES'},
-                                
-                                Thuesday:{status:'full',
-                                day:11,
-                                isInMonth:'YES'},
-                                Friday:{status:'full',
-                                day:12,
-                                isInMonth:'YES'},
-                                Saturday:{status:'full',
-                                day:13,
-                                isInMonth:'YES'},
-                                Sunday:{status:'full',
-                                day:14,
-                                isInMonth:'YES'}},
-                               {
-                                 
-                                Monday:{
-                                status:'full',
-                                day:15,
-                                isInMonth:'YES'},
-                                Tuesday:{
-                                status:'full',
-                                day:16,
-                                isInMonth:'YES'},
-                                Wednesday:{status:'full',
-                                day:17,
-                                isInMonth:'YES'},
-                               
-                                Thuesday:{status:'full',
-                                day:18,
-                                isInMonth:'YES'},
-                                Friday:{status:'full',
-                                day:19,
-                                isInMonth:'YES'},
-                                Saturday:{status:'full',
-                                day:20,
-                                isInMonth:'YES'},
-                                Sunday:{status:'full',
-                                day:21,
-                                isInMonth:'YES'}},
-                                {Monday:{
-                                status:'full',
-                                day:22,
-                                isInMonth:'YES'},
-                                Tuesday:{
-                                status:'full',
-                                day:23,
-                                isInMonth:'YES'},
-                                Wednesday:{status:'full',
-                                day:24,
-                                isInMonth:'YES'},
-                                
-                                Thuesday:{status:'full',
-                                day:25,
-                                isInMonth:'YES'},
-                                Friday:{status:'full',
-                                day:26,
-                                isInMonth:'YES'},
-                                Saturday:{status:'available',
-                                day:27,
-                                isInMonth:'YES',
-                                slots:[{
-                                          startTime:'10:30 am',
-                                          endTime:'11:00 am'
-                                          
-                                         },{
-                                          startTime:'11:00 am',
-                                         endTime:'11:30 am'
-                                         }
-                                      ]
-                                         },
-                                Sunday:{status:'full',
-                                day:28,
-                                isInMonth:'NO'}}
-                                ]*/
-        //ctrl.clearSearchKey();
+          ];
+        ctrl.changeMonth();
+       
+            //ctrl.clearSearchKey();
     };
     ctrl.initial();
-    
-    
-
-    
-  
-    
-   
 });

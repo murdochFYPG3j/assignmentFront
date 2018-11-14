@@ -60,6 +60,14 @@
                 </div>
             </div>
             <div class="row" style="margin-bottom: 15px">
+                <label class="col-md-1 control-label"> Password</label>
+                <div class="col-md-3 control-value">
+                    <input class="form-control" type="text" ng-model="ctrl.selectedUserDetails.password"> </div>
+                    
+                    <!-- <input class="form-control" type="text" ng-model="ctrl.selectedUserDetails.roleName" > -->
+                </div>
+            </div>
+           <!-- <div class="row" style="margin-bottom: 15px">
                 <label class="col-md-1 control-label">Contact No.*</label>
                 <div class="col-md-3">
                     <input class="form-control" ng-model="ctrl.selectedUserDetails.contactNo" name="contact" ng-minlength="8" ng-maxlength="8" ng-pattern="/^[6 8-9]{1}\d{7}/" required>
@@ -68,10 +76,10 @@
                         <p><span class="error" ng-show="userProfileForm.contact.$error.minlength">Too short!</span></p>
                         <p><span class="error" ng-show="userProfileForm.contact.$error.maxlength">Too long!</span></p>
                         <p><span class="error" ng-show="userProfileForm.contact.$error.pattern">Invalid contact number</span></p>
-                        <!--                        <p><span class="error" ng-show="userProfileForm.contact.$error.required">Required</span></p>-->
+                                                <p><span class="error" ng-show="userProfileForm.contact.$error.required">Required</span></p>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </form>
     </div>
 </div>

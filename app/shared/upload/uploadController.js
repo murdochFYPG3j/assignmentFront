@@ -5,7 +5,7 @@ angular.module('was-admin').controller('uploadController', function ($scope, $ui
     console.log('file is ' );
     console.dir(file);
 
-    var uploadUrl = "/fileUpload";
+    var uploadUrl = "/import-appointments";
     AppointmentManagementService.uploadFileToUrl(file, uploadUrl);
 
 });

@@ -9,7 +9,7 @@ angular.module('was-admin').service("createUserService", function ($q, $rootScop
     };
     
     this.createUser=function(param){
-        return Restangular.all(prefix + '/create-user').post(param);
+        return Restangular.all('/users').post(param);
     }
     
 

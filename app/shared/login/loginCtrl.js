@@ -44,9 +44,14 @@ angular.module('was-admin').controller('LoginController', function ($scope, $roo
                             $rootScope.username=data[0].first_name +' '+data[0].last_name;
                             $rootScope.userEmail=data[0].email;
                             $rootScope.selectedRoleCode=data[0].role;
+                            $rootScope.first_name=data[0].first_name;
+                            $rootScope.last_name=data[0].last_name;
+                            
                             sessionStorage.setItem('userId',data[0].id);
                             sessionStorage.setItem('userEmail',data[0].email);
                             sessionStorage.setItem('userName',data[0].first_name +' '+data[0].last_name);
+                            sessionStorage.setItem('firstName',data[0].first_name);
+                            sessionStorage.setItem('lastName',data[0].last_name);
                             sessionStorage.setItem('userRole',data[0].role);
                             console.info("result"+$rootScope.username);
                            // $state.go('landing.view');

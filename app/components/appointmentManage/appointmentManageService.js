@@ -8,14 +8,22 @@ angular.module('was-admin').service("AppointmentManagementService", function ($q
 
     
     
-    this.getAllappointmentList = function(){
-        return Restangular.one( '/get-all-appointmentList'+'/').get();
+    this.getAllappointmentList = function(year,month){
+        var link='?year='+year+'&month='+month
+        return Restangular.all( 'appointment-slots/all'+link).getList();
     };
+    
+    this.downloadCsv = function(){
+        return Restangular.one('/files/template.csv').get();
+    };
+    this.saveAllAppointments=function(appointments){
+        return Restangular.all('/appointments').post(appointments);
+    }
     this.getSetupImport=function(uploadForm){
         console.log('upload file');
         var fd = $rootScope.object2FormData(uploadForm);
 
-        return Restangular.one("/import")
+        return Restangular.one("/import-appointments")
             .withHttpConfig({
             transformRequest: angular.identity
         })

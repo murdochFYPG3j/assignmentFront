@@ -5,7 +5,7 @@ angular.module('was-admin').service("ProfileService", function ($q, $rootScope, 
     
 
     this.getUserDetail = function () {
-        return Restangular.all('/auth/me').get();
+        return Restangular.one('/auth/me').get();
     };
     
     this.updateUserDetail=function(param){

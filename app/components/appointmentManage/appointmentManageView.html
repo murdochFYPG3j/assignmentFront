@@ -8,6 +8,7 @@
         <div class="pull-right">
             <button class="btn btn-outline-primary" type="button"  ui-sref="appointment.list"><span class="fa fa-backward"></span> Back to Listing </button>
             <button class="btn btn-outline-danger" type="button"  ng-click="uploadTemplate()"><span class="fa fa-upload"></span> Upload Results</button>
+            <export-filtered-row-fn  class="btn" method="ctrl.downloadCsv()" filename="appointmentList.csv" /> 
            <!-- <label class="btn btn-sm btn-default navbar-btn btn-file" ng-if="!readAccessCheck()" ng-disabled="setupResultEventListDtos.length===0" ng-click="uploadTemplate()" ><span class="fa fa-upload" /> Upload Results</label>-->
         </div>
     </div>
@@ -59,19 +60,23 @@
                 <tbody>
                     <tr ng-repeat=" week in appointmentsVar">
                         <td style="min-width: 100px; max-width: 100px;"></td>
-                        <td ng-disbled="week.Monday.status=='full'">
-                            <div style="height: 100px;width: 100px;border-style: solid;" >
+                        <td ng-disbled="week.Monday.status=='full'"  style="padding: 0;!important">
+                            <div style="height: 100px;width: 100px;border-style: solid;border-width: thin;" >
                                 <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to View Appointment in That Day" tooltip-placement="left"  ng-click="ctrl.displayDay(week.Monday)"> <h1 >{{week.Monday.day}}</h1> </a>
+                                <div ng-repeat="slot in week.Monday.slots" style="text-align: center">
+                                    {{slot.name}}</div>
                             </div>
                             <!--<div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Monday.status=='available'}">
 <div>
 <h1>{{week.Monday.day}}</h1></div>
 </div>-->
                         </td>
-                        <td>
-                            <div style="height: 100px;width: 100px;border-style: solid;" >
+                        <td style="padding: 0;!important">
+                            <div style="height: 100px;width: 100px;border-style: solid;border-width: thin;" >
                                 <div >
                                     <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to View Appointment in That Day" tooltip-placement="left"  ng-click="ctrl.displayDay(week.Tuesday)"> <h1 >{{week.Tuesday.day}}</h1> </a>
+                                    <div ng-repeat="slot in week.Tuesday.slots" style="text-align: center">
+                                        {{slot.name}}</div>
                                 </div>
                                 
                             </div>
@@ -80,17 +85,22 @@
 <h1>{{week.Tuesday.day}}</h1></div>
 </div>-->
                         </td>
-                        <td>
-                            <div style="height: 100px;width: 100px;border-style: solid;" >
+                        <td style="padding: 0;!important">
+                            <div style="height: 100px;width: 100px;border-style: solid;border-width: thin;" >
                                 <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to View Appointment in That Day" tooltip-placement="left"  ng-click="ctrl.displayDay(week.Wednesday)"> <h1 >{{week.Wednesday.day}}</h1> </a>
+                                <div ng-repeat="slot in week.Wednesday.slots" style="text-align: center">
+                                    {{slot.name}}</div>
                             </div>
                             <!--<div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Wednesday.status=='available'}">
 <div>
 <h1>{{week.Wednesday.day}}</h1></div>
 </div>-->
                         </td>
-                        <td><div style="height: 100px;width: 100px;border-style: solid;" >
+                        <td style="padding: 0;!important">
+                            <div style="height: 100px;width: 100px;border-style: solid;border-width: thin;" >
                             <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to View Appointment in That Day" tooltip-placement="left"  ng-click="ctrl.displayDay(week.Thuesday)"> <h1 >{{week.Thuesday.day}}</h1> </a>
+                                <div ng-repeat="slot in week.Thuesday.slots" style="text-align: center">
+                                    {{slot.name}}</div>
                             </div>
                             
                             <!--<div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Thuesday.status=='available'}">
@@ -98,9 +108,11 @@
 <h1>{{week.Thuesday.day}}</h1></div>
 </div>-->
                         </td>
-                        <td>
-                            <div style="height: 100px;width: 100px;border-style: solid;" >
+                        <td style="padding: 0;!important">
+                            <div style="height: 100px;width: 100px;border-style: solid;border-width: thin;" >
                             <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to View Appointment in That Day" tooltip-placement="left"  ng-click="ctrl.displayDay(week.Friday)"> <h1 >{{week.Friday.day}}</h1> </a>
+                                <div ng-repeat="slot in week.Friday.slots" style="text-align: center">
+                                    {{slot.name}}</div>
                             </div>
                             
                             <!--<div style="height: 100px;width: 100px;border-style: solid;" ng-class="{'myOwnBg':week.Friday.status=='available'}">
@@ -108,21 +120,21 @@
 <h1>{{week.Friday.day}}</h1></div>
 </div>-->
                         </td>
-                        <td  >
-                            <div style="height: 100px;width: 100px;border-style: solid;" >
+                        <td  style="padding: 0;!important">
+                            <div style="height: 100px;width: 100px;border-style: solid;border-width: thin;" >
                             <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to View Appointment in That Day" tooltip-placement="left"  ng-click="ctrl.displayDay(week.Saturday)"> <h1 >{{week.Saturday.day}}</h1> </a>
-                            <div ng-repeat="user in week.Saturday.userList" style="text-align: center">
-                                {{user.name}}</div>
+                            <div ng-repeat="slot in week.Saturday.slots" style="text-align: center">
+                                {{slot.name}}</div>
                             </div>
                            
 
 
                         </td>
-                        <td>
-                            <div style="height: 100px;width: 100px;border-style: solid;" >
+                        <td style="padding: 0;!important">
+                            <div style="height: 100px;width: 100px;border-style: solid;border-width: thin;" >
                             <a class="btn btn-sm btn-default"  data-toggle="modal" data-target="#appointmentList" uib-tooltip="Click to View Appointment in That Day" tooltip-placement="left"  ng-click="ctrl.displayDay(week.Sunday)"> <h1 >{{week.Sunday.day}}</h1> </a>
-                            <div ng-repeat="user in week.Sunday.userList" style="text-align: center">
-                                {{user.name}}</div>
+                                <div ng-repeat="slot in week.Sunday.slots" style="text-align: center">
+                                    {{slot.name}}</div>
                             </div>
                             
                         </td>
@@ -177,7 +189,7 @@
                                             </select>
                                         </td>
                                         <td>{{slot.userName}}</td>
-                                        <td>{{slot.startTime}} - {{slot.endTime}}</td>
+                                        <td>{{slot.meta.start_time}} - {{slot.meta.end_time}}</td>
                                         <td>{{slot.location}}</td>
 
                                     </tr>
@@ -187,7 +199,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button class="btn  btn-primary" ng-click="ctrl.saveAppintment(ctrl.reason,slots)">
+                            <button class="btn  btn-primary" ng-click="ctrl.saveAppintment(ctrl.selectedDay.slots)">
                                 save
                             </button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

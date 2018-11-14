@@ -24,21 +24,21 @@ angular.module('was-admin').controller('createUserController', function ($scope,
            &&ctrl.selectedUserDetails.contactNo.length>0
            &&ctrl.selectedUserDetails.roleName.length>0){
            var param={
-                firstName:ctrl.selectedUserDetails.firstName,
-                lastName:ctrl.selectedUserDetails.lastName,
-                userEmail:ctrl.selectedUserDetails.userEmail,
-                roleName:ctrl.selectedUserDetails.roleName,
-                contactNo:ctrl.selectedUserDetails.contactNo
+               first_name:ctrl.selectedUserDetails.firstName,
+               last_name:ctrl.selectedUserDetails.lastName,
+               email:ctrl.selectedUserDetails.userEmail,
+               role:ctrl.selectedUserDetails.roleName,
+               password:ctrl.selectedUserDetails.password
             };
-            sweetAlert.swal({
+           /* sweetAlert.swal({
                 type: 'success',
                 text: 'Successfully created'
-            });
-            //var selectedUserDetailPromise=createUserService.createUser(param);
-           /* selectedUserDetailPromise.then(function (data) {
+            });*/
+            var selectedUserDetailPromise=createUserService.createUser(param);
+            selectedUserDetailPromise.then(function (data) {
                 ctrl.loading = false;
 
-                if (data.status == 'OK') {
+                if (data.status == '200 OK') {
                     sweetAlert.swal({
                         type: 'success',
                         text: 'Successfully Changed'
@@ -53,7 +53,7 @@ angular.module('was-admin').controller('createUserController', function ($scope,
                         dangerMode: true,
                     });
                 }
-            }, function (response) {});*/
+            }, function (response) {});
             
         }else{
             sweetAlert.swal({

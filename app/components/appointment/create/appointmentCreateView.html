@@ -161,8 +161,8 @@
                                 <tbody>
                                     <tr ng-repeat="slot in ctrl.slots">
 
-                                        <td><input type="checkbox" ng-model="slot.isSelected"
-                                                   ng-true-value="'YES'" ng-false-value="'NO'">{{slot.startTime}} - {{slot.endTime}}</td>
+                                        <td><input type="radio" ng-model="ctrl.isSelected"
+                                                   ng-value="slot"  >{{slot.startTime}} - {{slot.endTime}}</td>
 
                                     </tr>
                                 </tbody>

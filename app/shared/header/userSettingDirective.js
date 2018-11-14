@@ -9,7 +9,8 @@ angular.module('was-admin').directive('userSetting', ['$location', function () {
         controller: function ($scope, $rootScope, $filter, $state, sweetAlert, $location, Restangular, Constants, $q, LoginService,$window) {
             
             $scope.logoutUrl = Constants.LOGOUT_URL;
-            $rootScope.selectedRoleCode=$window.sessionStorage.getItem('userRole')
+            $rootScope.selectedRoleCode=$window.sessionStorage.getItem('userRole');
+            $rootScope.username=$window.sessionStorage.getItem('userName');
             $scope.$state = $state;
             $rootScope.userRoleFunctions = [{name:'user',
                                         code:'user'},

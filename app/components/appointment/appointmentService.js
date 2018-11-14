@@ -10,7 +10,7 @@ angular.module('was-admin').service("AppoinmentService", function ($q, $rootScop
     };
     
     this.getAllappointmentList = function(){
-        return Restangular.one( '/appointment-slots').get();
+        return Restangular.all( '/my-appointments').getList();
     };
     
     this.getAllappointmentStatus = function(){
@@ -18,7 +18,7 @@ angular.module('was-admin').service("AppoinmentService", function ($q, $rootScop
     };
     this.getAllSlotFromMonth = function (year,month){
         var urlLink="?year="+year+'&month='+month;
-        return Restangular.one("/appointment-slots/available"+urlLink).get();
+        return Restangular.all("/appointment-slots/available"+urlLink).getList();
     };
     this.downloadCsv = function (month){
         return Restangular.all(prefix + '/download-all-appointment-list').post(month);
@@ -28,16 +28,16 @@ angular.module('was-admin').service("AppoinmentService", function ($q, $rootScop
         return Restangular.all(prefix + '/get-all-available-slot-for-day').post(param);
     };
    
-    this.cancelAppointment=function(id){
-        return Restangular.all(prefix + '/cancel-appoinment').post(id);
+    this.cancelAppointment=function(apmt_id){
+        return Restangular.all('/appointment-slot/'+apmt_id+'/cancel').post();
     }
     
     this.changeAppointment=function(param){
         return Restangular.all('/appointments').post(param);
     }
     
-    this.createAppointment=function(param){
-        return Restangular.all(prefix + '/create-appoinments').post(param);
+    this.createAppointment=function(apmt_id){
+        return Restangular.all( '/appointment-slot/'+apmt_id+'/book').post();
     }
  
 });

@@ -12,13 +12,20 @@ angular.module('was-admin').controller('profileController', function ($scope, $r
                                   roleName:'User',
                                  contactNo:81888888};*/
         
-       
-            var userDetailPromise=ProfileService.getUserDetail();
-        $q.all([userDetailPromise]).then(function (data) {
-            ctrl.selectedUserDetails=data;
-           
+        ctrl.selectedUserDetails={firstName:null,
+                                  lastName:null,
+                                  email:null,
+                                  role:null,
+                                  contactNo:null,
+                                  id:null};
+          
+        ctrl.selectedUserDetails.firstName= $window.sessionStorage.getItem("firstName");
+        ctrl.selectedUserDetails.lastName= $window.sessionStorage.getItem("lastName");
+        ctrl.selectedUserDetails.userEmail= $window.sessionStorage.getItem("userEmail");
+        ctrl.selectedUserDetails.roleName= $window.sessionStorage.getItem("userRole");
+        ctrl.selectedUserDetails.contactNo=87653864;
+        ctrl.selectedUserDetails.id= $window.sessionStorage.getItem("userId");
 
-        });
    //     console.log("Innital"+JSON.stringify(ctrl.nominations,null,2));
     }
     initial();
@@ -32,11 +39,12 @@ angular.module('was-admin').controller('profileController', function ($scope, $r
         ctrl.updateEmail();
         if(!ctrl.resultEmail){
            var param={
-                firstName:ctrl.selectedUserDetails.firstName,
-                lastName:ctrl.selectedUserDetails.lastName,
-                userEmail:ctrl.selectedUserDetails.userEmail,
-                roleName:ctrl.selectedUserDetails.roleName,
-                contactNo:ctrl.selectedUserDetails.contactNo
+               first_name:ctrl.selectedUserDetails.firstName,
+               last_name:ctrl.selectedUserDetails.lastName,
+               email:ctrl.selectedUserDetails.userEmail,
+               role:ctrl.selectedUserDetails.roleName,
+               id:ctrl.selectedUserDetails.id/*,
+                contactNo:ctrl.selectedUserDetails.contactNo*/
             };
           /*  sweetAlert.swal({
                 type: 'success',
@@ -46,7 +54,7 @@ angular.module('was-admin').controller('profileController', function ($scope, $r
             selectedUserDetailPromise.then(function (data) {
                 ctrl.loading = false;
 
-                if (data.status == '200') {
+                if (data.id !=null) {
                     sweetAlert.swal({
                         type: 'success',
                         text: 'Successfully Changed'
